@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title class="title">EZ Money</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://clockmantellstime.github.io/other/num2txt.js"></script>
+    <link rel="icon" href="static/icon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // if (localStorage.getItem("loggedInUserData") == undefined) {
+        //     var link = `${location.protocol}//${location.host}/sign-in`
+        //     document.querySelector("head").innerHTML += `<meta http-equiv="Refresh" content="0; url='${link}'" />`
+        // }
+    </script>
+    <script defer src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.12.0/js/md5.min.js"></script>
+</head>
+
+<body>
+    <div class="start">
+        <div class="label1">EZ Money</div>
+        <p class="label2">A simple game where you can earn some simple money</p>
+        <button class="startGame">start</button>
+    </div>
+    <div class="game">
+        <div class="planets">
+            <div class="earth">
+                <div class="earthContent">
+                    <label class="earthMoneyDisplay">money</label>
+                    <br><br>
+                    <button class="earthPrintMoney defaultButtons">Print money!</button>
+                    <br>
+                    <button class="earthUpgradeButton defaultButtons">upgrades</button><br>
+                    <div class="earthUpgrades Upgrades">
+                        <div class="earthPage1 earthpage">
+                            <div class="earthPrinter">
+                                <button class="earthUpgradePrinter">buy</button>
+                                <label class="earthUpgradeDisplay"></label>
+                            </div>
+                            <br>
+                            <div class="earthAutoUpgrade">
+                                <button class="earthAutoUpgradeBuy">buy</button>
+                                <label class="earthAutoUpgradeDisplay">Auto upgrade</label>
+                            </div>
+                            <div class="earthAutoPrintMoney">
+                                <button class="earthAutoPrintMoneyBuy">buy</button>
+                                <label class="earthAutoPrintMoneyDisplay">Auto print money</label>
+                            </div>
+                            <div class="earthAutoPlay">
+                                <button class="earthAutoPlayBuy">buy</button>
+                                <label class="earthAutoPlayDisplay">Auto play</label>
+                            </div>
+                            <br>
+                            <div class="earthBuilder">
+                                <button class="earthHireBuilder">Hire</button>
+                                <label class="earthBuilderDisplay"></label>
+                            </div>
+                            <div class="earthManager">
+                                <button class="earthHireManager">Hire</button>
+                                <label class="earthManagerDisplay"></label>
+                            </div>
+                            <div class="earthSuperManager">
+                                <button class="earthHireSuperManager">Hire</button>
+                                <label class="earthSuperManagerDisplay"></label>
+                            </div>
+                            <br>
+                            <div class="earthpage1factories"></div>
+                        </div>
+                        <div class="earthPage2 earthpage">
+                            <div class="earthEngineer">
+                                <button class="earthHireEngineer">Hire</button>
+                                <label class="earthEngineerDisplay"></label>
+                            </div>
+                            <br><div class="earthpage2factories"></div>
+                            <div class="earthPrestige Prestige">
+            
+                                <br><button class="earthPrestigeButton PrestigeButton">
+                                Prestige                    
+                                <div class="earthPrestigeProgress PrestigeProgress">
+                                    <div class="earthPrestigeProgressFill PrestigeProgressFill"></div>
+                                </div>
+                                </button><br>
+                                <label>Prestige: Restart your earth progress, but earn prestige tokens which can be used for more upgrades</label><br>
+                                <label class="earthPrestigeDisplay">Prestiges: 0</label>
+                            </div><br>
+                        </div>
+                        <div class="earthChangePage ChangePage">
+                            <label class="earthPageDisplay">Page: 0</label>
+                            <button class="earthUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="earthDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="earthPrestigeUpgradesButton defaultButtons PrestigeUpgradesButton">prestige upgrades</button>
+            
+                    <div class="earthPrestigeUpgrades PrestigeUpgrades">
+                        <label class="earthTokenDisplay">PT$:100</label><br><br>
+            
+            
+                        <div class="earthNuclearFactories prestigeUpgrade">
+                            <button class="earthBuyNuclearFactories">buy</button>
+                            <label class="earthNuclearFactoriesDisplay">Increase production and speed by nuclear power. Cost: PT$1 Level: 10</label>
+                        </div>
+                        <div class="earthTaxCuts prestigeUpgrade">
+                            <button class="earthBuyTaxCuts">buy</button>
+                            <label class="earthTaxCutsDisplay">Reduce the prices of everything. Cost: PT$6 Tax cuts: 10%</label>
+                        </div>
+                        <div class="bearthBuyOneGetOneFree prestigeUpgrade">
+                            <button class="earthBuyBuyOneGetOneFree">buy</button>
+                            <label class="earthBOGOFDisplay">Increase the amount of free factories you get when BUYING. Cost: PT$4 Level: 10</label>
+                        </div>
+                        <div class="earthMoreMoney prestigeUpgrade">
+                            <button class="earthBuyMoreMoney">buy</button>
+                            <label class="earthMoreMoneyDisplay">The more you buy, the more you multiplier you get. Cost: PT$6 Multiplier: 10</label>
+                        </div>
+                        <div class="earthMoreTokens prestigeUpgrade">
+                            <button class="earthBuyMoreTokens">buy</button>
+                            <label class="earthMoreTokensDisplay">The more you buy, the more you tokens you get per prestige. Cost: PT$6 Extra Tokens: 10</label>
+                        </div>
+    
+                        <br><br>
+    
+                        <div class="earthWwizzard">
+                            <button class="earthHireWizzard">Hire</button>
+                            <label class="earthWizzardDisplay">eeeeee</label>
+                        </div>
+                        <div class="earthHackerMan">
+                            <button class="earthHireHackerMan">Hire</button>
+                            <label class="earthHackerManDisplay">eeeeee</label>
+                        </div>
+                        <div class="earthArtist">
+                            <button class="earthHireArtist">Hire</button>
+                            <label class="earthArtistDisplay">eeeeee</label>
+                        </div>
+                        <div class="earthNasaEngineer">
+                            <button class="earthHireNasaEngineer">Hire</button>
+                            <label class="earthNasaEngineerDisplay">eeeeee</label>
+                        </div>
+                        <div class="earthBuisnessManager">
+                            <button class="earthHireBuisnessManager">Hire</button>
+                            <label class="earthBuisnessManagerDisplay">eeeeee</label>
+                        </div>
+            
+                        
+                    </div>
+
+
+                    <button class="earthAscentionUpgradesButton ascentionUpgradesButton defaultButtons">ascentions upgrades</button>
+
+                    <div class="earthAscentionUpgrades ascentionUpgrades">
+                        <div class="earthAscentionPage1 earthAscentionPage">
+                            Earth upgrades
+                            <br>
+                            <label for="" class="earthEarthAscentionTokenDisplay"></label>
+                            <br><br>
+                            
+                            <div class="earthEarthAscentionMultiplier">
+                                <button class="earthEarthAscentionMultiplierBuy">buy</button>
+                                <label for="" class="earthEarthAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="earthEarthAutoPrintStack">
+                                <button class="earthEarthAutoPrintStackBuy">buy</button>
+                                <label for="" class="earthEarthAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="earthEarthAutoUpgradeStack">
+                                <button class="earthEarthAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="earthEarthAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="earthEarthAtomicPower">
+                                <button class="earthEarthAtomicPowerBuy">buy</button>
+                                <label for="" class="earthEarthAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="earthEarthAscentionTaxCuts">
+                                <button class="earthEarthAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="earthEarthAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="earthEarthscentionBOGOF">
+                                <button class="earthEarthAscentionBOGOFBuy">buy</button>
+                                <label for="" class="earthEarthAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="earthEartharcaneScholar">
+                                <button class="earthEartharcaneScholarBuy">hire</button>
+                                <label for="" class="earthEartharcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="earthEarthtechnomancer">
+                                <button class="earthEarthtechnomancerBuy">hire</button>
+                                <label for="" class="earthEarthtechnomancerDisplay"></label>
+                            </dif>
+                            <div class="earthEarthshadowHacker">
+                                <button class="earthEarthshadowHackerBuy">hire</button>
+                                <label for="" class="earthEarthshadowHackerDisplay"></label>
+                            </div>
+                            <div class="earthEarthroguewizzard">
+                                <button class="earthEarthroguewizzardBuy">hire</button>
+                                <label for="" class="earthEarthroguewizzardDisplay"></label>
+                            </div>
+                            <div class="earthEarthEnchanter">
+                                <button class="earthEarthEnchanterBuy">hire</button>
+                                <label for="" class="earthEarthEnchanterDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="earthTrackerBeam">
+                                <button class="earthTrackerBeamBuy">buy</button>
+                                <label for="" class="earthTrackerBeamDisplay">Buy a tracker beam to track asteroids!</label>
+                            </div>
+                        </div>
+                        <div class="earthAscentionPage2 earthAscentionPage">
+                            Moon upgrades
+                            <br>
+                            <label for="" class="earthMoonAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="earthMoonAscentionMultiplier">
+                                <button class="earthMoonAscentionMultiplierBuy">buy</button>
+                                <label for="" class="earthMoonAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="earthMoonAutoPrintStack">
+                                <button class="earthMoonAutoPrintStackBuy">buy</button>
+                                <label for="" class="earthMoonAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="earthMoonAutoUpgradeStack">
+                                <button class="earthMoonAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="earthMoonAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="earthMoonAtomicPower">
+                                <button class="earthMoonAtomicPowerBuy">buy</button>
+                                <label for="" class="earthMoonAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="earthMoonAscentionTaxCuts">
+                                <button class="earthMoonAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="earthMoonAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="earthMoonscentionBOGOF">
+                                <button class="earthMoonAscentionBOGOFBuy">buy</button>
+                                <label for="" class="earthMoonAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+                            
+                            <div class="earthMoonarcaneScholar">
+                                <button class="earthMoonarcaneScholarBuy">hire</button>
+                                <label for="" class="earthMoonarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="earthMoontechnomancer">
+                                <button class="earthMoontechnomancerBuy">hire</button>
+                                <label for="" class="earthMoontechnomancerDisplay"></label>
+                            </dif>
+                            <div class="earthMoonshadowHacker">
+                                <button class="earthMoonshadowHackerBuy">hire</button>
+                                <label for="" class="earthMoonshadowHackerDisplay"></label>
+                            </div>
+                            <div class="earthMoonroguewizzard">
+                                <button class="earthMoonroguewizzardBuy">hire</button>
+                                <label for="" class="earthMoonroguewizzardDisplay"></label>
+                            </div>
+                            <div class="earthMoonEnchanter">
+                                <button class="earthMoonEnchanterBuy">hire</button>
+                                <label for="" class="earthMoonEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="earthAscentionPage3 earthAscentionPage">
+                            Mars upgrades
+                            <br>
+                            <label for="" class="earthMarsAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="earthMarsAscentionMultiplier">
+                                <button class="earthMarsAscentionMultiplierBuy">buy</button>
+                                <label for="" class="earthMarsAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="earthMarsAutoPrintStack">
+                                <button class="earthMarsAutoPrintStackBuy">buy</button>
+                                <label for="" class="earthMarsAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="earthMarsAutoUpgradeStack">
+                                <button class="earthMarsAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="earthMarsAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="earthMarsAtomicPower">
+                                <button class="earthMarsAtomicPowerBuy">buy</button>
+                                <label for="" class="earthMarsAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="earthMarsAscentionTaxCuts">
+                                <button class="earthMarsAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="earthMarsAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="earthMarsscentionBOGOF">
+                                <button class="earthMarsAscentionBOGOFBuy">buy</button>
+                                <label for="" class="earthMarsAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="earthMarsarcaneScholar">
+                                <button class="earthMarsarcaneScholarBuy">hire</button>
+                                <label for="" class="earthMarsarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="earthMarstechnomancer">
+                                <button class="earthMarstechnomancerBuy">hire</button>
+                                <label for="" class="earthMarstechnomancerDisplay"></label>
+                            </dif>
+                            <div class="earthMarsshadowHacker">
+                                <button class="earthMarsshadowHackerBuy">hire</button>
+                                <label for="" class="earthMarsshadowHackerDisplay"></label>
+                            </div>
+                            <div class="earthMarsroguewizzard">
+                                <button class="earthMarsroguewizzardBuy">hire</button>
+                                <label for="" class="earthMarsroguewizzardDisplay"></label>
+                            </div>
+                            <div class="earthMarsEnchanter">
+                                <button class="earthMarsEnchanterBuy">hire</button>
+                                <label for="" class="earthMarsEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="earthAscentionChangePage ChangePage">
+                            <label class="earthAscentionPageDisplay">Page: 0</label>
+                            <button class="earthAscentionUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="earthAscentionDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="earthBackground">
+                    <div class="earthGround Ground"></div>
+                    <div class="earthSky Sky"></div>
+                </div>
+            </div>  
+            <div class="moon">
+                <div class="moonLockScreen LockScreen">
+                    <br><br>
+                    <label for="YourMom" class="purchaseMoonLabel purchasePlanetLabel">Purchase moon</label><br>
+                    <label for="YourMom" class="purchaseMoonLabel2">Purchase a license to be able to start menufacturing money on moon!</label><br>
+                    <label for="YourMom" class="purchaseMoonLabelBest">cost: $10000</label><br><br><br>
+                    <button class="purchaseMoon purchasePlanet">buy</button>
+                </div>
+                <div class="moonContent">
+                    <label for="" class="moonMoneyDisplay">Moon Money: M$100</label><br>
+                    <label for="" class="moonPopulationDisplay">Population: 0</label><br>
+                    <label for="" class="moonFoodDisplay">Food: 100</label><br>
+                    <label for="" class="moonWaterDisplay">Water: 100</label><br>
+                    <label for="" class="moonEnergyDisplay">Energy: 100</label><br><br>
+                    <button class="printMoonMoney defaultButtons">Make moon money</button><br>
+                    <button class="moonUpgradeButton defaultButtons">upgrades</button><br>
+                    <div class="moonUpgrades Upgrades">
+                        <div class="moonPage1 moonpage">
+                            <div class="moonPrinter">
+                                <button class="upgradeMoonPrinter" onclick="upgrade('moon')">buy</button>
+                                <label class="moonUpgradeDisplay">Costs $50 to upgrade. You currently make $2.02 million per click.</label>
+                            </div>
+                            
+                            <br>
+        
+                            <div class="moonAutoPrintMoney">
+                                <button class="moonAutoPrintMoneyBuy">buy</button>
+                                <label for="" class="moonAutoPrintMoneyDisplay">autoprint</label>
+                            </div>
+        
+                            <div class="moonAutoUpgrade">
+                                <button class="moonAutoUpgradeBuy">buy</button>
+                                <label for="" class="moonAutoUpgradeDisplay">autoupgrade</label>
+                            </div>
+        
+                            <br>
+        
+                            <div class="moonColonists">
+                                <button class="hireMoonColonist" onclick="hireColonists('moon')">hire</button>
+                                <label for="" class="moonColonistsDisplay">hi</label>
+                            </div>
+                            <div class="moonBuilder">
+                                <button class="hireMoonBuilder">buy</button>
+                                <label for="" class="moonBuilderDisplay">builder</label>
+                            </div>
+                            <div class="moonEngineer">
+                                <button class="hireMoonEngineer">buy</button>
+                                <label class="moonEngineerDisplay">engineer</label>
+                            </div>
+                            <div class="moonManager">
+                                <button class="hireMoonManager">buy</button>
+                                <label for="" class="moonManagerDisplay">manager</label>
+                            </div>
+                            <div class="moonSuperManager">
+                                <button class="hireMoonSuperManager">buy</button>
+                                <label for="" class="moonSuperManagerDisplay">super manager</label>
+                            </div>
+        
+        
+                        </div>
+        
+                        <div class="moonPage2 moonpage">
+                            <div class="moonpage2reactors">
+        
+                            </div>
+        
+                            <br>
+        
+                            <div class="moonpage2habitats">
+        
+                            </div>
+                        </div>
+        
+                        <div class="moonPage3 moonpage">
+                            <div class="moonpage3watermakers">
+        
+                            </div>
+                            <br>
+                            <div class="moonpage3farms">
+        
+                            </div>
+                            <br>
+                        </div>
+        
+                        <div class="moonPage4 moonpage">
+                            <div class="moonpage4factories">
+        
+                            </div>
+        
+                            <div class="moonPrestige Prestige">
+            
+                                <br><button class="moonPrestigeButton PrestigeButton">
+                                Prestige                    
+                                <div class="moonPrestigeProgress PrestigeProgress">
+                                    <div class="moonPrestigeProgressFill PrestigeProgressFill"></div>
+                                </div>
+                                </button><br>
+                                <label>Prestige: Restart your moon progress, but earn prestige tokens which can be used for more upgrades</label><br>
+                                <label class="moonPrestigeDisplay">Prestiges: 0</label>
+                            </div><br>
+                        </div>
+        
+                        <div class="moonChangePage ChangePage">
+                            <label class="moonPageDisplay">Page: 0</label>
+                            <button class="moonUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="moonDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="moonPrestigeUpgradesButton defaultButtons PrestigeUpgradesButton">prestige upgrades</button>
+            
+                    <div class="moonPrestigeUpgrades PrestigeUpgrades">
+                        <label class="moonTokenDisplay">PT$:100</label><br><br>
+            
+            
+                        <div class="moonNuclearFactories prestigeUpgrade">
+                            <button class="moonBuyNuclearFactories">buy</button>
+                            <label class="moonNuclearFactoriesDisplay">Increase production and speed by nuclear power. Cost: PT$69 Level: 10</label>
+                        </div>
+                        <div class="moonTaxCuts prestigeUpgrade">
+                            <button class="moonBuyTaxCuts">buy</button>
+                            <label class="moonTaxCutsDisplay">Reduce the prices of everything. Cost: PT$69 Tax cuts: 10%</label>
+                        </div>
+                        <div class="bmoonBuyOneGetOneFree prestigeUpgrade">
+                            <button class="moonBuyBuyOneGetOneFree">buy</button>
+                            <label class="moonBOGOFDisplay">Increase the amount of free factories you get when BUYING. Cost: PT$69 Level: 10</label>
+                        </div>
+                        <div class="moonMoreMoney prestigeUpgrade">
+                            <button class="moonBuyMoreMoney">buy</button>
+                            <label class="moonMoreMoneyDisplay">The more you buy, the more you multiplier you get. Cost: PT$69 Multiplier: 10</label>
+                        </div>
+                        <div class="moonMoreTokens prestigeUpgrade">
+                            <button class="moonBuyMoreTokens">buy</button>
+                            <label class="moonMoreTokensDisplay">The more you buy, the more you tokens you get per prestige. Cost: PT$69 Extra Tokens: 10</label>
+                        </div>
+        
+                        <br><br>
+        
+                        <div class="moonWwizzard">
+                            <button class="moonHireWizzard">Hire</button>
+                            <label class="moonWizzardDisplay">eeeeee</label>
+                        </div>
+                        <div class="moonHackerMan">
+                            <button class="moonHireHackerMan">Hire</button>
+                            <label class="moonHackerManDisplay">eeeeee</label>
+                        </div>
+                        <div class="moonArtist">
+                            <button class="moonHireArtist">Hire</button>
+                            <label class="moonArtistDisplay">eeeeee</label>
+                        </div>
+                        <div class="moonNasaEngineer">
+                            <button class="moonHireNasaEngineer">Hire</button>
+                            <label class="moonNasaEngineerDisplay">eeeeee</label>
+                        </div>
+                        <div class="moonBuisnessManager">
+                            <button class="moonHireBuisnessManager">Hire</button>
+                            <label class="moonBuisnessManagerDisplay">eeeeee</label>
+                        </div>
+                    </div>
+
+
+                    <button class="moonAscentionUpgradesButton ascentionUpgradesButton defaultButtons">ascentions upgrades</button>
+
+                    <div class="moonAscentionUpgrades ascentionUpgrades">
+                        <div class="moonAscentionPage1 earthAscentionPage">
+                            Earth upgrades
+                            <br>
+                            <label for="" class="moonEarthAscentionTokenDisplay"></label>
+                            <br><br>
+                            
+                            <div class="moonEarthAscentionMultiplier">
+                                <button class="moonEarthAscentionMultiplierBuy">buy</button>
+                                <label for="" class="moonEarthAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="moonEarthAutoPrintStack">
+                                <button class="moonEarthAutoPrintStackBuy">buy</button>
+                                <label for="" class="moonEarthAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="moonEarthAutoUpgradeStack">
+                                <button class="moonEarthAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="moonEarthAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="moonEarthAtomicPower">
+                                <button class="moonEarthAtomicPowerBuy">buy</button>
+                                <label for="" class="moonEarthAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="moonEarthAscentionTaxCuts">
+                                <button class="moonEarthAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="moonEarthAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="moonEarthscentionBOGOF">
+                                <button class="moonEarthAscentionBOGOFBuy">buy</button>
+                                <label for="" class="moonEarthAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="moonEartharcaneScholar">
+                                <button class="moonEartharcaneScholarBuy">hire</button>
+                                <label for="" class="moonEartharcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="moonEarthtechnomancer">
+                                <button class="moonEarthtechnomancerBuy">hire</button>
+                                <label for="" class="moonEarthtechnomancerDisplay"></label>
+                            </dif>
+                            <div class="moonEarthshadowHacker">
+                                <button class="moonEarthshadowHackerBuy">hire</button>
+                                <label for="" class="moonEarthshadowHackerDisplay"></label>
+                            </div>
+                            <div class="moonEarthroguewizzard">
+                                <button class="moonEarthroguewizzardBuy">hire</button>
+                                <label for="" class="moonEarthroguewizzardDisplay"></label>
+                            </div>
+                            <div class="moonEarthEnchanter">
+                                <button class="moonEarthEnchanterBuy">hire</button>
+                                <label for="" class="moonEarthEnchanterDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="moonTrackerBeam">
+                                <button class="moonTrackerBeamBuy">buy</button>
+                                <label for="" class="moonTrackerBeamDisplay">Buy a tracker beam to track asteroids!</label>
+                            </div>
+                        </div>
+                        <div class="moonAscentionPage2 earthAscentionPage">
+                            Moon upgrades
+                            <br>
+                            <label for="" class="moonMoonAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="moonMoonAscentionMultiplier">
+                                <button class="moonMoonAscentionMultiplierBuy">buy</button>
+                                <label for="" class="moonMoonAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="moonMoonAutoPrintStack">
+                                <button class="moonMoonAutoPrintStackBuy">buy</button>
+                                <label for="" class="moonMoonAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="moonMoonAutoUpgradeStack">
+                                <button class="moonMoonAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="moonMoonAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="moonMoonAtomicPower">
+                                <button class="moonMoonAtomicPowerBuy">buy</button>
+                                <label for="" class="moonMoonAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="moonMoonAscentionTaxCuts">
+                                <button class="moonMoonAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="moonMoonAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="moonMoonscentionBOGOF">
+                                <button class="moonMoonAscentionBOGOFBuy">buy</button>
+                                <label for="" class="moonMoonAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+                            
+                            <div class="moonMoonarcaneScholar">
+                                <button class="moonMoonarcaneScholarBuy">hire</button>
+                                <label for="" class="moonMoonarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="moonMoontechnomancer">
+                                <button class="moonMoontechnomancerBuy">hire</button>
+                                <label for="" class="moonMoontechnomancerDisplay"></label>
+                            </dif>
+                            <div class="moonMoonshadowHacker">
+                                <button class="moonMoonshadowHackerBuy">hire</button>
+                                <label for="" class="moonMoonshadowHackerDisplay"></label>
+                            </div>
+                            <div class="moonMoonroguewizzard">
+                                <button class="moonMoonroguewizzardBuy">hire</button>
+                                <label for="" class="moonMoonroguewizzardDisplay"></label>
+                            </div>
+                            <div class="moonMoonEnchanter">
+                                <button class="moonMoonEnchanterBuy">hire</button>
+                                <label for="" class="moonMoonEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="moonAscentionPage3 earthAscentionPage">
+                            Mars upgrades
+                            <br>
+                            <label for="" class="moonMarsAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="moonMarsAscentionMultiplier">
+                                <button class="moonMarsAscentionMultiplierBuy">buy</button>
+                                <label for="" class="moonMarsAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="moonMarsAutoPrintStack">
+                                <button class="moonMarsAutoPrintStackBuy">buy</button>
+                                <label for="" class="moonMarsAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="moonMarsAutoUpgradeStack">
+                                <button class="moonMarsAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="moonMarsAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="moonMarsAtomicPower">
+                                <button class="moonMarsAtomicPowerBuy">buy</button>
+                                <label for="" class="moonMarsAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="moonMarsAscentionTaxCuts">
+                                <button class="moonMarsAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="moonMarsAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="moonMarsscentionBOGOF">
+                                <button class="moonMarsAscentionBOGOFBuy">buy</button>
+                                <label for="" class="moonMarsAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="moonMarsarcaneScholar">
+                                <button class="moonMarsarcaneScholarBuy">hire</button>
+                                <label for="" class="moonMarsarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="moonMarstechnomancer">
+                                <button class="moonMarstechnomancerBuy">hire</button>
+                                <label for="" class="moonMarstechnomancerDisplay"></label>
+                            </dif>
+                            <div class="moonMarsshadowHacker">
+                                <button class="moonMarsshadowHackerBuy">hire</button>
+                                <label for="" class="moonMarsshadowHackerDisplay"></label>
+                            </div>
+                            <div class="moonMarsroguewizzard">
+                                <button class="moonMarsroguewizzardBuy">hire</button>
+                                <label for="" class="moonMarsroguewizzardDisplay"></label>
+                            </div>
+                            <div class="moonMarsEnchanter">
+                                <button class="moonMarsEnchanterBuy">hire</button>
+                                <label for="" class="moonMarsEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="moonAscentionChangePage ChangePage">
+                            <label class="moonAscentionPageDisplay">Page: 0</label>
+                            <button class="moonAscentionUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="moonAscentionDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="moonBackground">
+                    <div class="moonGround Ground"></div>
+                    <div class="moonSky Sky"></div>
+                </div>
+            </div>
+            <div class="mars">
+                <div class="marsLockScreen LockScreen">
+                    <br><br>
+                    <label for="YourMom" class="purchaseMarsLabel purchasePlanetLabel">Purchase mars</label><br>
+                    <label for="YourMom" class="purchaseMarsLabel2">Purchase a license to be able to start menufacturing money on mars!</label><br>
+                    <label for="YourMom" class="purchaseMarsLabelBest">cost: $10000</label><br><br><br>
+                    <button class="purchaseMars purchasePlanet">buy</button>
+                </div>
+                <div class="marsContent">
+                    <label for="" class="marsMoneyDisplay">Mars Money: M$100</label><br>
+                    <label for="" class="marsPopulationDisplay">Population: 0</label><br>
+                    <label for="" class="marsFoodDisplay">Food: 100</label><br>
+                    <label for="" class="marsWaterDisplay">Water: 100</label><br>
+                    <label for="" class="marsEnergyDisplay">Energy: 100</label><br><br>
+                    <button class="printMarsMoney defaultButtons">Make mars money</button><br>
+                    <button class="marsUpgradeButton defaultButtons">upgrades</button><br>
+                    <div class="marsUpgrades Upgrades">
+                        <div class="marsPage1 marspage">
+                            <div class="marsPrinter">
+                                <button class="upgradeMarsPrinter" onclick="upgrade('mars')">buy</button>
+                                <label class="marsUpgradeDisplay">Costs $50 to upgrade. You currently make $2.02 million per click.</label>
+                            </div>
+                            
+                            <br>
+        
+                            <div class="marsAutoPrintMoney">
+                                <button class="marsAutoPrintMoneyBuy">buy</button>
+                                <label for="" class="marsAutoPrintMoneyDisplay">autoprint</label>
+                            </div>
+        
+                            <div class="marsAutoUpgrade">
+                                <button class="marsAutoUpgradeBuy">buy</button>
+                                <label for="" class="marsAutoUpgradeDisplay">autoupgrade</label>
+                            </div>
+        
+                            <br>
+        
+                            <div class="marsColonists">
+                                <button class="hireMarsColonist" onclick="hireColonists('mars')">hire</button>
+                                <label for="" class="marsColonistsDisplay">hi</label>
+                            </div>
+                            <div class="marsBuilder">
+                                <button class="hireMarsBuilder">buy</button>
+                                <label for="" class="marsBuilderDisplay">builder</label>
+                            </div>
+                            <div class="marsEngineer">
+                                <button class="hireMarsEngineer">buy</button>
+                                <label class="marsEngineerDisplay">engineer</label>
+                            </div>
+                            <div class="marsManager">
+                                <button class="hireMarsManager">buy</button>
+                                <label for="" class="marsManagerDisplay">manager</label>
+                            </div>
+                            <div class="marsSuperManager">
+                                <button class="hireMarsSuperManager">buy</button>
+                                <label for="" class="marsSuperManagerDisplay">super manager</label>
+                            </div>
+        
+        
+                        </div>
+        
+                        <div class="marsPage2 marspage">
+                            <div class="marspage2reactors">
+        
+                            </div>
+        
+                            <br>
+        
+                            <div class="marspage2habitats">
+        
+                            </div>
+                        </div>
+        
+                        <div class="marsPage3 marspage">
+                            <div class="marspage3watermakers">
+        
+                            </div>
+                            <br>
+                            <div class="marspage3farms">
+        
+                            </div>
+                            <br>
+                        </div>
+        
+                        <div class="marsPage4 marspage">
+                            <div class="marspage4factories">
+        
+                            </div>
+        
+                            <div class="marsPrestige Prestige">
+            
+                                <br><button class="marsPrestigeButton PrestigeButton">
+                                Prestige                    
+                                <div class="marsPrestigeProgress PrestigeProgress">
+                                    <div class="marsPrestigeProgressFill PrestigeProgressFill"></div>
+                                </div>
+                                </button><br>
+                                <label>Prestige: Restart your mars progress, but earn prestige tokens which can be used for more upgrades</label><br>
+                                <label class="marsPrestigeDisplay">Prestiges: 0</label>
+                            </div><br>
+                        </div>
+
+                        <div class="marsPage5 marspage">
+                            <div class="ascend Prestige">
+            
+                                <br><button class="ascendButton PrestigeButton">
+                                Ascend                    
+                                <div class="ascendProgress PrestigeProgress">
+                                    <div class="ascendProgressFill PrestigeProgressFill"></div>
+                                </div>
+                                </button><br>
+                                <label>Ascend: Lost all your progress, but earn ascension tokens which are used for special upgrades</label><br>
+                                <label class="AscendDisplay">Ascensions: 0</label>
+                            </div>
+                        </div>
+        
+                        <div class="marsChangePage ChangePage">
+                            <label class="marsPageDisplay">Page: 0</label>
+                            <button class="marsUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="marsDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="marsPrestigeUpgradesButton defaultButtons PrestigeUpgradesButton">prestige upgrades</button>
+            
+                    <div class="marsPrestigeUpgrades PrestigeUpgrades">
+                        <label class="marsTokenDisplay">PT$:100</label><br><br>
+            
+            
+                        <div class="marsNuclearFactories prestigeUpgrade">
+                            <button class="marsBuyNuclearFactories">buy</button>
+                            <label class="marsNuclearFactoriesDisplay">Increase production and speed by nuclear power. Cost: PT$69 Level: 10</label>
+                        </div>
+                        <div class="marsTaxCuts prestigeUpgrade">
+                            <button class="marsBuyTaxCuts">buy</button>
+                            <label class="marsTaxCutsDisplay">Reduce the prices of everything. Cost: PT$69 Tax cuts: 10%</label>
+                        </div>
+                        <div class="bmarsBuyOneGetOneFree prestigeUpgrade">
+                            <button class="marsBuyBuyOneGetOneFree">buy</button>
+                            <label class="marsBOGOFDisplay">Increase the amount of free factories you get when BUYING. Cost: PT$69 Level: 10</label>
+                        </div>
+                        <div class="marsMoreMoney prestigeUpgrade">
+                            <button class="marsBuyMoreMoney">buy</button>
+                            <label class="marsMoreMoneyDisplay">The more you buy, the more you multiplier you get. Cost: PT$69 Multiplier: 10</label>
+                        </div>
+                        <div class="marsMoreTokens prestigeUpgrade">
+                            <button class="marsBuyMoreTokens">buy</button>
+                            <label class="marsMoreTokensDisplay">The more you buy, the more you tokens you get per prestige. Cost: PT$69 Extra Tokens: 10</label>
+                        </div>
+        
+                        <br><br>
+        
+                        <div class="marsWwizzard">
+                            <button class="marsHireWizzard">Hire</button>
+                            <label class="marsWizzardDisplay">eeeeee</label>
+                        </div>
+                        <div class="marsHackerMan">
+                            <button class="marsHireHackerMan">Hire</button>
+                            <label class="marsHackerManDisplay">eeeeee</label>
+                        </div>
+                        <div class="marsArtist">
+                            <button class="marsHireArtist">Hire</button>
+                            <label class="marsArtistDisplay">eeeeee</label>
+                        </div>
+                        <div class="marsNasaEngineer">
+                            <button class="marsHireNasaEngineer">Hire</button>
+                            <label class="marsNasaEngineerDisplay">eeeeee</label>
+                        </div>
+                        <div class="marsBuisnessManager">
+                            <button class="marsHireBuisnessManager">Hire</button>
+                            <label class="marsBuisnessManagerDisplay">eeeeee</label>
+                        </div>
+                    </div>
+
+
+                    <button class="marsAscentionUpgradesButton ascentionUpgradesButton defaultButtons">ascentions upgrades</button>
+
+                    <div class="marsAscentionUpgrades ascentionUpgrades">
+                        <div class="marsAscentionPage1 earthAscentionPage">
+                            Earth upgrades
+                            <br>
+                            <label for="" class="marsEarthAscentionTokenDisplay"></label>
+                            <br><br>
+                            
+                            <div class="marsEarthAscentionMultiplier">
+                                <button class="marsEarthAscentionMultiplierBuy">buy</button>
+                                <label for="" class="marsEarthAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="marsEarthAutoPrintStack">
+                                <button class="marsEarthAutoPrintStackBuy">buy</button>
+                                <label for="" class="marsEarthAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="marsEarthAutoUpgradeStack">
+                                <button class="marsEarthAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="marsEarthAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="marsEarthAtomicPower">
+                                <button class="marsEarthAtomicPowerBuy">buy</button>
+                                <label for="" class="marsEarthAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="marsEarthAscentionTaxCuts">
+                                <button class="marsEarthAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="marsEarthAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="marsEarthscentionBOGOF">
+                                <button class="marsEarthAscentionBOGOFBuy">buy</button>
+                                <label for="" class="marsEarthAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="marsEartharcaneScholar">
+                                <button class="marsEartharcaneScholarBuy">hire</button>
+                                <label for="" class="marsEartharcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="marsEarthtechnomancer">
+                                <button class="marsEarthtechnomancerBuy">hire</button>
+                                <label for="" class="marsEarthtechnomancerDisplay"></label>
+                            </dif>
+                            <div class="marsEarthshadowHacker">
+                                <button class="marsEarthshadowHackerBuy">hire</button>
+                                <label for="" class="marsEarthshadowHackerDisplay"></label>
+                            </div>
+                            <div class="marsEarthroguewizzard">
+                                <button class="marsEarthroguewizzardBuy">hire</button>
+                                <label for="" class="marsEarthroguewizzardDisplay"></label>
+                            </div>
+                            <div class="marsEarthEnchanter">
+                                <button class="marsEarthEnchanterBuy">hire</button>
+                                <label for="" class="marsEarthEnchanterDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="marsTrackerBeam">
+                                <button class="marsTrackerBeamBuy">buy</button>
+                                <label for="" class="marsTrackerBeamDisplay">Buy a tracker beam to track asteroids!</label>
+                            </div>
+                        </div>
+                        <div class="marsAscentionPage2 earthAscentionPage">
+                            Moon upgrades
+                            <br>
+                            <label for="" class="marsMoonAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="marsMoonAscentionMultiplier">
+                                <button class="marsMoonAscentionMultiplierBuy">buy</button>
+                                <label for="" class="marsMoonAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="marsMoonAutoPrintStack">
+                                <button class="marsMoonAutoPrintStackBuy">buy</button>
+                                <label for="" class="marsMoonAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="marsMoonAutoUpgradeStack">
+                                <button class="marsMoonAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="marsMoonAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="marsMoonAtomicPower">
+                                <button class="marsMoonAtomicPowerBuy">buy</button>
+                                <label for="" class="marsMoonAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="marsMoonAscentionTaxCuts">
+                                <button class="marsMoonAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="marsMoonAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="marsMoonscentionBOGOF">
+                                <button class="marsMoonAscentionBOGOFBuy">buy</button>
+                                <label for="" class="marsMoonAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+                            
+                            <div class="marsMoonarcaneScholar">
+                                <button class="marsMoonarcaneScholarBuy">hire</button>
+                                <label for="" class="marsMoonarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="marsMoontechnomancer">
+                                <button class="marsMoontechnomancerBuy">hire</button>
+                                <label for="" class="marsMoontechnomancerDisplay"></label>
+                            </dif>
+                            <div class="marsMoonshadowHacker">
+                                <button class="marsMoonshadowHackerBuy">hire</button>
+                                <label for="" class="marsMoonshadowHackerDisplay"></label>
+                            </div>
+                            <div class="marsMoonroguewizzard">
+                                <button class="marsMoonroguewizzardBuy">hire</button>
+                                <label for="" class="marsMoonroguewizzardDisplay"></label>
+                            </div>
+                            <div class="marsMoonEnchanter">
+                                <button class="marsMoonEnchanterBuy">hire</button>
+                                <label for="" class="marsMoonEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="marsAscentionPage3 earthAscentionPage">
+                            Mars upgrades
+                            <br>
+                            <label for="" class="marsMarsAscentionTokenDisplay"></label>
+                            <br><br>
+
+                            <div class="marsMarsAscentionMultiplier">
+                                <button class="marsMarsAscentionMultiplierBuy">buy</button>
+                                <label for="" class="marsMarsAscentionMultiplierDisplay"></label>
+                            </div>
+                            <div class="marsMarsAutoPrintStack">
+                                <button class="marsMarsAutoPrintStackBuy">buy</button>
+                                <label for="" class="marsMarsAutoPrintStackDisplay"></label>
+                            </div>
+                            <div class="marsMarsAutoUpgradeStack">
+                                <button class="marsMarsAutoUpgradeStackBuy">buy</button>
+                                <label for="" class="marsMarsAutoUpgradeStackDisplay"></label>
+                            </div>
+                            <div class="marsMarsAtomicPower">
+                                <button class="marsMarsAtomicPowerBuy">buy</button>
+                                <label for="" class="marsMarsAtomicPowerDisplay"></label>
+                            </div>
+                            <div class="marsMarsAscentionTaxCuts">
+                                <button class="marsMarsAscentionTaxCutsBuy">buy</button>
+                                <label for="" class="marsMarsAscentionTaxCutsDisplay"></label>
+                            </div>
+                            <div class="marsMarsscentionBOGOF">
+                                <button class="marsMarsAscentionBOGOFBuy">buy</button>
+                                <label for="" class="marsMarsAscentionBOGOFDisplay"></label>
+                            </div>
+
+                            <br><br>
+
+                            <div class="marsMarsarcaneScholar">
+                                <button class="marsMarsarcaneScholarBuy">hire</button>
+                                <label for="" class="marsMarsarcaneScholarDisplay"></label>
+                            </div>
+                            <dif class="marsMarstechnomancer">
+                                <button class="marsMarstechnomancerBuy">hire</button>
+                                <label for="" class="marsMarstechnomancerDisplay"></label>
+                            </dif>
+                            <div class="marsMarsshadowHacker">
+                                <button class="marsMarsshadowHackerBuy">hire</button>
+                                <label for="" class="marsMarsshadowHackerDisplay"></label>
+                            </div>
+                            <div class="marsMarsroguewizzard">
+                                <button class="marsMarsroguewizzardBuy">hire</button>
+                                <label for="" class="marsMarsroguewizzardDisplay"></label>
+                            </div>
+                            <div class="marsMarsEnchanter">
+                                <button class="marsMarsEnchanterBuy">hire</button>
+                                <label for="" class="marsMarsEnchanterDisplay"></label>
+                            </div>
+                        </div>
+                        <div class="marsAscentionChangePage ChangePage">
+                            <label class="marsAscentionPageDisplay">Page: 0</label>
+                            <button class="marsAscentionUp Up">
+                                <div class="up_arrow"></div>
+                            </button>
+                            <button class="marsAscentionDown Down">
+                                <div class="down_arrow"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="marsBackground">
+                    <div class="marsGround Ground"></div>
+                    <div class="marsSky Sky"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="asteroids">
+            <div class="menu">
+                <div class="menu_title">Menu</div>
+                <br>
+                <br>
+                <button class="toggleMenu">MENU</button>
+                <button class="menu_options_button automationToggle">Automations</button>
+                <button class="menu_options_button upgradesToggle">Upgrades</button>
+                <button class="menu_options_button moreResearchToggle">More Upgrades</button>
+                <button class="menu_options_button oreResearchToggle">Ore Research</button>
+                <button class="menu_options_button asteroidResearchToggle">Asteroid Research</button>
+                <button class="menu_options_button asteroidResearchToggle">Asteroid Belts</button>
+            </div>  
+            <label for="" class="asteroidMoneyDisplay">U$: 100</label><br>
+            <label for="" class="asteroidResearchDisplay">R$: 100</label><br>
+            <label for="" class="asteroidDisplay">Asteroid: Nx72h</label><br>
+            <label for="" class="asteroidDisplay">Asteroid Belt: Meteorium Maze</label><br><br>
+            <div class="asteroids"></div>
+
+            <div class="automations menu_options">
+                <div class="menu_title">Automations</div>
+
+                <div class="automationsubmenus submenus">
+                    
+                </div>
+            </div>
+
+            <div class="upgrades menu_options">
+                <div class="menu_title">Upgrades</div>
+
+                <div class="upgradessubmenus submenus">
+                    
+                </div>
+            </div>
+
+            <div class="oreResearch menu_options">
+                <div class="menu_title">Ore Research</div>
+
+                <div class="oreResearchsubmenus submenus">
+                    
+                </div>
+            </div>
+
+            <div class="asteroidResearch menu_options">
+                <div class="menu_title">Asteroid Research</div>
+
+                <div class="asteroidResearchsubmenus submenus">
+                    
+                </div>
+            </div>
+
+            <div class="moreResearch menu_options">
+                <div class="menu_title">More Upgrades</div>
+
+                <div class="moreResearchsubmenus submenus">
+                    
+                </div>
+            </div>
+
+            <div class="asteroidBelts menu_options">
+                <div class="menu_title">Asteroid Belts</div>
+
+                <div class="asteroidBeltssubmenus submenus">
+                    
+                </div>
+            </div>
+        </div>
+
+        <button class="changeWorldUp" title="Go to next planet">></button>
+        <button class="changeWorldDown" title="Go to previous planet"><</button>
+
+        <div class="buttons2">
+            <button class="changeAsteroidUp button2" title="Go to previous asteroid"><div class="up_arrow"></div></button>
+            <button class="changeAsteroidDown button2" title="Go to next asteroid"><div class="down_arrow"></div></button>
+        </div>
+    </div>
+    <div class="difficulty">
+        <p class="Select">Select difficulty</p>
+        <div class="difficultyButtons"> 
+            <button class="easy">easy</button>
+            <button class="medium">medium</button>
+            <button class="hard">hard</button>
+            <button class="insane">insane</button>
+            <button class="impossible">impossible</button>
+        </div>
+    </div>
+    <dialog class="alert">
+        <div class="message"></div>
+        <button class="close">close</button>
+    </dialog>
+
+    <dialog class="confirm">
+        <div class="content">
+            <div class="question"></div>
+            <button class="ok">ok</button>
+            <button class="cancel">cancel</button>
+        </div>
+    </dialog>
+
+    <div class="explosion">
+        <p class="kaboom">KABOOM</p>
+    </div>
+</body>
+
+</html>
