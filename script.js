@@ -131,7 +131,18 @@ class AsteroidBelt {
             cost: cost,
             purchased: false
         }
+
+        const asteroidBektButton = `
+            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="automateAsteroidOre('${name}','${name}')">${"Fly to "+ capitalizeFirstLetter(name)}</button>
+        `
+        document.querySelector(".asteroidBeltssubmenus").innerHTML += asteroidBektButton
+        
+
     }
+}
+
+function buyAsteroidBelt(name) {
+    console.log(name)
 }
 
 class Asteroid {
@@ -1019,6 +1030,10 @@ new factory(`mars_mk9`,27000000000000000,"mars",`page4`)
 new factory(`mars_mk10`,1500000000000000000,"mars",`page4`)
 
 new AsteroidBelt("Asterothoria Belt",50)
+new AsteroidBelt("Meteorium Maze",50)
+new AsteroidBelt("Solaris Spires",50)
+new AsteroidBelt("Celestial Labyrinth",50)
+new AsteroidBelt("Starshatter Rift",50)
 
 new AsteroidOre("Stone",1,0,"Asterothoria Belt")
 new AsteroidOre("Copper",100,100,"Asterothoria Belt")
@@ -2666,7 +2681,7 @@ function asteroidsVisible() {
         return true
     }
 }
-
+    
 function getRandomNumber(min, max) {
     const random = Math.random();
     const scaled = random * (max - min);
@@ -3197,6 +3212,7 @@ function toggleAsteroidMenuVisibility(selector){
     document.querySelector(".oreResearch").style.display = "none"
     document.querySelector(".upgrades").style.display = "none"
     document.querySelector(".automations").style.display = "none"
+    document.querySelector(".asteroidBelts").style.display = "none"
 
     if (style == "block") {
         document.querySelector(selector).style.display = "none"
@@ -3532,6 +3548,9 @@ document.querySelector(".asteroidResearchToggle").onclick = () => {
 }
 document.querySelector(".moreResearchToggle").onclick = () => {
     toggleAsteroidMenuVisibility(".moreResearch")
+}
+document.querySelector(".asteroidBeltToggle").onclick = () => {
+    toggleAsteroidMenuVisibility(".asteroidBelts")
 }
 
 
