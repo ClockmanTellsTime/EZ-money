@@ -1302,10 +1302,26 @@ function researchAsteroidAmount(number) {
     }
 }
 
+function getPreviousOre(ore) {
+    for (var belt of q.asteroidBelts) {
+        if (q[belt+"Ores"].includes(ore)) {
+            var index = q[belt+"Ores"].indexOf(ore) - 1
+            
+            console.log(q[belt+"Ores"][index])
+            return q[belt+"Ores"][index]
+        }
+    }
+}
+
 function researchAsteroidOre(asteroid_name, ore_name){
     var ore = q.asteroid.asteroids[asteroid_name][ore_name]
-
+    var previousOreName = getPreviousOre(ore_name)
+    var previousOre = q.asteroid.asteroids[asteroid_name][previousOreName]
+    console.log(previousOreName,previousOre)
+    
     if (ore.unlocked == true) {return}
+    if (previousOre.unlocked == false) {customAlert(`You need to unlock ${previousOreName} first!`);return}
+    if (previousOre.level < 20) {customAlert(`${capitalizeFirstLetter(previousOreName)} needs to be level 20! It is currently level ${previousOre.level}!`); return}
 
     if (q.asteroid.research >= ore.researchRequired) {
         q.asteroid.research -= ore.researchRequired
