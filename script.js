@@ -133,7 +133,7 @@ class AsteroidBelt {
         }
 
         const asteroidBektButton = `
-            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="automateAsteroidOre('${name}','${name}')">${"Fly to "+ capitalizeFirstLetter(name)}</button>
+            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="buyAsteroidBelt('${name}','${name}')">${"Fly to "+ capitalizeFirstLetter(name)}</button>
         `
         document.querySelector(".asteroidBeltssubmenus").innerHTML += asteroidBektButton
         
@@ -142,7 +142,15 @@ class AsteroidBelt {
 }
 
 function buyAsteroidBelt(name) {
-    console.log(name)
+    if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
+    if (q.asteroid.asteroidBelts[name].purchased) {return}
+
+    q.asteroid.money -= q.asteroid.asteroidBelts[name].cost
+    q.asteroid.asteroidBelts[name].purchased = true
+    q.asteroid.AsteroidBelt = name
+    q.asteroid.asteroids = {}
+    q.asteroid.asteroidsMining = 0
+    asteroid = 0
 }
 
 class Asteroid {
@@ -1060,6 +1068,32 @@ new AsteroidOre("Labradorite",10000000000000000000000, 250000,"Asterothoria Belt
 new AsteroidOre("Malachite",100000000000000000000000, 275000,"Asterothoria Belt")
 new AsteroidOre("Quartz",1000000000000000000000000, 300000,"Asterothoria Belt")
 new AsteroidOre("Obsidian",10000000000000000000000000, 325000,"Asterothoria Belt")
+
+new AsteroidOre("a",1,0,"Meteorium Maze")
+new AsteroidOre("fdsafdas",100,100,"Meteorium Maze")
+new AsteroidOre("fdsafadsf",1000,500,"Meteorium Maze")
+new AsteroidOre("Silfdsafasdver",5500,1000,"Meteorium Maze")
+new AsteroidOre("Steedfdsafdsal",10000,2000,"Meteorium Maze")
+new AsteroidOre("Gofadsld",1000000,3750,"Meteorium Maze")
+new AsteroidOre("Tofdsapaz",10000000,5000,"Meteorium Maze")
+new AsteroidOre("Amfdsethyst",100000000,10000,"Meteorium Maze")
+new AsteroidOre("Rufsdaby",1000000000,15000,"Meteorium Maze")
+new AsteroidOre("Safsdapphire",10000000000,20000,"Meteorium Maze")
+new AsteroidOre("Emerfadsald",100000000000, 25000,"Meteorium Maze")
+new AsteroidOre("Pyrfadsite",1000000000000, 30000,"Meteorium Maze")
+new AsteroidOre("Zifsdarcon",10000000000000, 35000,"Meteorium Maze")
+new AsteroidOre("Kyfdasanite",100000000000000,40000,"Meteorium Maze")
+new AsteroidOre("Garnfadset",1000000000000000, 45000,"Meteorium Maze")
+new AsteroidOre("Jafdasde",10000000000000000, 50000,"Meteorium Maze")
+new AsteroidOre("Berfdsayl",100000000000000000, 75000,"Meteorium Maze")
+new AsteroidOre("Citrifadsne",1000000000000000000,100000,"Meteorium Maze")
+new AsteroidOre("Fluorifadste",10000000000000000000,125000,"Meteorium Maze")
+new AsteroidOre("Hyacifadnth",100000000000000000000,150000,"Meteorium Maze")
+new AsteroidOre("Lolifdaste",1000000000000000000000,200000,"Meteorium Maze")
+new AsteroidOre("Labrafadsdorite",10000000000000000000000, 250000,"Meteorium Maze")
+new AsteroidOre("Malacfadshite",100000000000000000000000, 275000,"Meteorium Maze")
+new AsteroidOre("Quartfdasz",1000000000000000000000000, 300000,"Meteorium Maze")
+new AsteroidOre("Obsidifasdan",10000000000000000000000000, 325000,"Meteorium Maze")
 
 q.asteroid.Stone.unlocked = true
 
@@ -3122,7 +3156,7 @@ if (q.mars.purchased) {
 
 setIntervul(function(){
     for (var a of q.asteroids) {
-        for (var ore of q.asteroidOres) {
+        for (var ore of q[q.asteroid.belt+"Ores"]) {
             if (q.asteroid.asteroids[a][ore].auto) {
                 document.querySelector(`.${a}_${capitalizeFirstLetter(ore)}_give`).click()
             }
@@ -3135,7 +3169,7 @@ setIntervul(function(){
 setIntervul(function(){
 
     for(var a of q.asteroids) {
-        for (var o of q.asteroidOres) {
+        for (var o of q[q.asteroid.belt+"Ores"]) {
             var ore = q.asteroid.asteroids[a][o]
 
             if (ore.clicked == false) {continue}
@@ -3589,7 +3623,7 @@ setIntervul(() => {
             q.asteroid.asteroidsMining += 1
         })
     }
-},60000)
+},6000)
 
 function e(){
     q.asteroid.trackerBeam.purchased = true
