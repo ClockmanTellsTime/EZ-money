@@ -133,7 +133,7 @@ class AsteroidBelt {
         }
 
         const asteroidBektButton = `
-            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="buyAsteroidBelt('${name}' ">${"Fly to "+ capitalizeFirstLetter(name)}</button>
+            <button class="upgradeButton ${String(name).replaceAll(" ","")+"Buy"}" onclick="buyAsteroidBelt('${name}' ">${"Fly to "+ capitalizeFirstLetter(name)}</button>
         `
         document.querySelector(".asteroidBeltssubmenus").innerHTML += asteroidBektButton
         
@@ -144,6 +144,8 @@ class AsteroidBelt {
 function buyAsteroidBelt(name) {
     if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
     if (q.asteroid.asteroidBelts[name].purchased) {return}
+
+    
 
     q.asteroid.money -= q.asteroid.asteroidBelts[name].cost
     q.asteroid.asteroidBelts[name].purchased = true
@@ -1045,6 +1047,8 @@ new AsteroidBelt("Solaris Spires",50)
 new AsteroidBelt("Celestial Labyrinth",50)
 new AsteroidBelt("Starshatter Rift",50)
 
+q.asteroid.asteroidBelts["Asterothoria Belt"].purchased = true
+
 new AsteroidOre("Stone",1,0,"Asterothoria Belt")
 new AsteroidOre("Copper",100,100,"Asterothoria Belt")
 new AsteroidOre("Iron",1000,500,"Asterothoria Belt")
@@ -1307,8 +1311,6 @@ function l(name, div) {
         `
 
         document.querySelector(".oreResearchsubmenus > ."+name+"submenu").innerHTML += oreResearchButtonHtml
-
-        console.log("e")
     }
 }
 
@@ -2198,6 +2200,17 @@ function displayStats() {
         }
         //if asteroids visble
         else {
+
+
+            for (var asteroidbelt of q.asteroidBelts) {
+                if (q.asteroid.asteroidBelts[asteroidbelt].purchased) {
+                    document.querySelector(`.${String(asteroidbelt).replaceAll(" ","")+"Buy"}`).style.display = "none"
+                }
+                else {
+                    document.querySelector(`.${String(asteroidbelt).replaceAll(" ","")+"Buy"}`).style.display = "block"
+                }
+            }
+
             for (var upgrade of q.asteroidOreUpgrades) {
                 for (var a of q.asteroids) {
                     for (var ore in q.asteroid.asteroids[a]){
@@ -2253,6 +2266,9 @@ function displayStats() {
             for (var n of numbersLessThanN(q.asteroid.maxAsteroids+1)) {
                 document.querySelector(`.unlock_${n}_astroids`).style.display = "none"
             }
+
+
+
         }
     }
     catch(err) {
