@@ -133,7 +133,7 @@ class AsteroidBelt {
         }
 
         const asteroidBektButton = `
-            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="buyAsteroidBelt('${name}','${name}')">${"Fly to "+ capitalizeFirstLetter(name)}</button>
+            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(name)+"Buy"}" onclick="buyAsteroidBelt('${name}' ">${"Fly to "+ capitalizeFirstLetter(name)}</button>
         `
         document.querySelector(".asteroidBeltssubmenus").innerHTML += asteroidBektButton
         
@@ -144,11 +144,12 @@ class AsteroidBelt {
 function buyAsteroidBelt(name) {
     if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
     if (q.asteroid.asteroidBelts[name].purchased) {return}
-
+    
     q.asteroid.money -= q.asteroid.asteroidBelts[name].cost
     q.asteroid.asteroidBelts[name].purchased = true
-    q.asteroid.AsteroidBelt = name
+    q.asteroid.belt = name
     q.asteroid.asteroids = {}
+    q.asteroids = []
     q.asteroid.asteroidsMining = 0
     asteroid = 0
 }
@@ -157,6 +158,7 @@ class Asteroid {
     constructor(name, belt) {
         q.asteroids.push(name)
         q.asteroid.asteroids[name] = {}
+        q.asteroid.asteroidsMining += 1
 
         for (var asteroidOre of q[belt+"Ores"]) {
             q.asteroid.asteroids[name][asteroidOre] = JSON.parse(JSON.stringify(q.asteroid[asteroidOre]))
@@ -3626,7 +3628,6 @@ setIntervul(() => {
 
         customConfirm(`An asteroid with the name ${name} has been spotted!!! Would you like to mine it?`, () => {
             new Asteroid(name,q.asteroid.belt)
-            q.asteroid.asteroidsMining += 1
         })
     }
 },6000)
