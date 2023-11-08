@@ -133,7 +133,7 @@ class AsteroidBelt {
         }
 
         const asteroidBektButton = `
-            <button class="upgradeButton ${String(name).replaceAll(" ","")+"Buy"}" onclick="buyAsteroidBelt('${name}' ">${"Fly to "+ capitalizeFirstLetter(name)}</button>
+            <button class="upgradeButton ${String(name).replaceAll(" ","")+"Buy"}" onclick="buyAsteroidBelt('${name}') ">${"Fly to "+ capitalizeFirstLetter(name)}</button>
         `
         document.querySelector(".asteroidBeltssubmenus").innerHTML += asteroidBektButton
         
@@ -145,7 +145,7 @@ function buyAsteroidBelt(name) {
     if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
     if (q.asteroid.asteroidBelts[name].purchased) {return}
 
-    
+
 
     q.asteroid.money -= q.asteroid.asteroidBelts[name].cost
     q.asteroid.asteroidBelts[name].purchased = true
@@ -1250,17 +1250,6 @@ function loadAsteroidHtml(name) {
     document.querySelector(".upgradessubmenus").innerHTML += automations
     document.querySelector(".oreResearchsubmenus").innerHTML += automations
     document.querySelector(".moreResearchsubmenus").innerHTML += automations
-    
-
-
-    for (var i = 2; i <= 100; i++){
-
-        
-
-        var button = `<button class="upgradeButton unlock_${i}_astroids" onclick="researchAsteroidAmount(${i})">Mine ${i} asteroids</button>`
-
-        document.querySelector(".asteroidResearchsubmenus").innerHTML += button
-    }
 
     for (var upgrade of q.asteroidOreUpgrades) {
         for (var ore of q[q.asteroid.belt+"Ores"]) {
@@ -1270,6 +1259,15 @@ function loadAsteroidHtml(name) {
     }
     l(name, div)
 }
+
+function ie() {
+    for (var i = 2; i <= 100; i++){
+        var button = `<button class="upgradeButton unlock_${i}_astroids" onclick="researchAsteroidAmount(${i})">Mine ${i} asteroids</button>`
+
+        document.querySelector(".asteroidResearchsubmenus").innerHTML += button
+    }
+}
+
 
 function l(name, div) {
 
@@ -2201,7 +2199,7 @@ function displayStats() {
         //if asteroids visble
         else {
 
-
+            document.querySelector(".asteroidDisplay").innerHTML = `Asteroid Belt: ${q.asteroid.belt}`
             for (var asteroidbelt of q.asteroidBelts) {
                 if (q.asteroid.asteroidBelts[asteroidbelt].purchased) {
                     document.querySelector(`.${String(asteroidbelt).replaceAll(" ","")+"Buy"}`).style.display = "none"
@@ -2742,6 +2740,7 @@ function startGame() {
     for (var asteroid of q.asteroids) {
         loadAsteroidHtml(asteroid)
     }
+    ie()
 
     document.querySelector(`.earth`).style.display = "block"
 
