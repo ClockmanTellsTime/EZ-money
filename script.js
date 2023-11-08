@@ -1071,9 +1071,9 @@ new AsteroidOre("Malachite",100000000000000000000000, 275000,"Asterothoria Belt"
 new AsteroidOre("Quartz",1000000000000000000000000, 300000,"Asterothoria Belt")
 new AsteroidOre("Obsidian",10000000000000000000000000, 325000,"Asterothoria Belt")
 
-new AsteroidOre("a",1,0,"Meteorium Maze")
-new AsteroidOre("fdsafdas",100,100,"Meteorium Maze")
-new AsteroidOre("fdsafadsf",1000,500,"Meteorium Maze")
+new AsteroidOre("A",1,0,"Meteorium Maze")
+new AsteroidOre("Fdsafdas",100,100,"Meteorium Maze")
+new AsteroidOre("Fdsafadsf",1000,500,"Meteorium Maze")
 new AsteroidOre("Silfdsafasdver",5500,1000,"Meteorium Maze")
 new AsteroidOre("Steedfdsafdsal",10000,2000,"Meteorium Maze")
 new AsteroidOre("Gofadsld",1000000,3750,"Meteorium Maze")
@@ -1098,6 +1098,7 @@ new AsteroidOre("Quartfdasz",1000000000000000000000000, 300000,"Meteorium Maze")
 new AsteroidOre("Obsidifasdan",10000000000000000000000000, 325000,"Meteorium Maze")
 
 q.asteroid.Stone.unlocked = true
+q.asteroid.A.unlocked = true
 
 new AsteroidOreUpgrade("1.5",1.5,12)
 new AsteroidOreUpgrade("2",2,25)
@@ -1272,7 +1273,7 @@ function l(name, div) {
         q.asteroid.asteroids[name][n].clicked = false
 
         var set = document.createElement("div")
-        set.id = name + "_"+ n + "_set"
+        set.id = name + "_"+ capitalizeFirstLetter(n) + "_set"
         set.className = "set"
         set.innerHTML = `
         <div class="asteroid_set_container">
@@ -2223,7 +2224,13 @@ function displayStats() {
                             document.querySelector(selector).style.display = "block"
     
                             var selector2 = `#${a}_${capitalizeFirstLetter(ore)}_set`
-                            document.querySelector(selector2).style.display = "none"
+
+                            try{
+                                document.querySelector(selector2).style.display = "none"
+                            }
+                            catch(err){
+                                console.log(selector2)
+                            }
                         }
     
                         if (q.asteroid.asteroids[a][ore].upgrades[upgrade].purchased) {
