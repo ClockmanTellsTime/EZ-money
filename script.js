@@ -1245,6 +1245,27 @@ function loadAsteroidHtml(name) {
     document.querySelector(".moreResearchsubmenus").innerHTML += automations
     
 
+
+    for (var i = 2; i <= 100; i++){
+
+        
+
+        var button = `<button class="upgradeButton unlock_${i}_astroids" onclick="researchAsteroidAmount(${i})">Mine ${i} asteroids</button>`
+
+        document.querySelector(".asteroidResearchsubmenus").innerHTML += button
+    }
+
+    for (var upgrade of q.asteroidOreUpgrades) {
+        for (var ore of q.asteroidOres) {
+            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidOreUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
+            document.querySelector(".moreResearchsubmenus > ."+name+"submenu").innerHTML += button
+        }
+    }
+
+    l(name, div)
+}
+
+function l(name, div) {
     for (var n of q.asteroidOres) {
         q.asteroid.asteroids[name][n].clicked = false
 
@@ -1282,23 +1303,8 @@ function loadAsteroidHtml(name) {
         `
 
         document.querySelector(".oreResearchsubmenus > ."+name+"submenu").innerHTML += oreResearchButtonHtml
-    }
 
-
-    for (var i = 2; i <= 100; i++){
-
-        
-
-        var button = `<button class="upgradeButton unlock_${i}_astroids" onclick="researchAsteroidAmount(${i})">Mine ${i} asteroids</button>`
-
-        document.querySelector(".asteroidResearchsubmenus").innerHTML += button
-    }
-
-    for (var upgrade of q.asteroidOreUpgrades) {
-        for (var ore of q.asteroidOres) {
-            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidOreUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
-            document.querySelector(".moreResearchsubmenus > ."+name+"submenu").innerHTML += button
-        }
+        console.log("e")
     }
 }
 
