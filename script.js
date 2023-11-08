@@ -144,7 +144,7 @@ class AsteroidBelt {
 function buyAsteroidBelt(name) {
     if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
     if (q.asteroid.asteroidBelts[name].purchased) {return}
-    
+
     q.asteroid.money -= q.asteroid.asteroidBelts[name].cost
     q.asteroid.asteroidBelts[name].purchased = true
     q.asteroid.belt = name
@@ -1258,17 +1258,17 @@ function loadAsteroidHtml(name) {
     }
 
     for (var upgrade of q.asteroidOreUpgrades) {
-        for (var ore of q.asteroidOres) {
+        for (var ore of q[q.asteroid.belt+"Ores"]) {
             var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidOreUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
             document.querySelector(".moreResearchsubmenus > ."+name+"submenu").innerHTML += button
         }
     }
-
     l(name, div)
 }
 
 function l(name, div) {
-    for (var n of q.asteroidOres) {
+
+    for (var n of q[q.asteroid.belt+"Ores"]) {
         q.asteroid.asteroids[name][n].clicked = false
 
         var set = document.createElement("div")
@@ -1285,6 +1285,7 @@ function l(name, div) {
                 <label class="click_display ${name}_${n}_click">$12</label>
         </div></div><br><br><br><br>
         `
+        
 
         div.appendChild(set)
 
