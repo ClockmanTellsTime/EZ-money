@@ -5,6 +5,7 @@
 // Meteorium Maze
 
 
+
 document.addEventListener("keydown", event => {
     if (gameLoaded) {
         if (event.key.toLowerCase() == "r") {
@@ -313,11 +314,23 @@ class Planet {
 }
 
 
+function getRandomElement(arr) {
+    // Check if the array is not empty
+    if (arr.length === 0) {
+      return undefined; // Return undefined if the array is empty
+    }
+  
+    // Generate a random index within the array's length
+    const randomIndex = Math.floor(Math.random() * arr.length);
+  
+    // Return the element at the randomly generated index
+    return arr[randomIndex];
+  }
+
 class AsteroidOre {
     constructor(name, value, researchRequired, belt) {
         q[belt+"Ores"].push(name)
         q.asteroidOres.push(name)
-
         q.asteroid[name] = {
             value: value,
             originalValue: value,
@@ -1050,6 +1063,9 @@ new AsteroidBelt("Starshatter Rift",50)
 q.asteroid.asteroidBelts["Asterothoria Belt"].purchased = true
 unlock_price_progression = [0, 100, 500, 1000, 2000, 3750, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 75000, 100000, 125000, 150000, 200000, 250000, 275000, 300000, 325000]
 
+
+var x = 10
+
 new AsteroidOre("Stone",1,unlock_price_progression[0],"Asterothoria Belt")
 new AsteroidOre("Copper",100,unlock_price_progression[1],"Asterothoria Belt")
 new AsteroidOre("Iron",1000,unlock_price_progression[2],"Asterothoria Belt")
@@ -1101,6 +1117,7 @@ new AsteroidOre("Cuprite", x, unlock_price_progression[21], "Meteorium Maze")
 new AsteroidOre("Tenorite", x, unlock_price_progression[22], "Meteorium Maze")
 new AsteroidOre("Wurtzite", x, unlock_price_progression[23], "Meteorium Maze")
 new AsteroidOre("Tetrahedrite", x, unlock_price_progression[24], "Meteorium Maze")
+
 new AsteroidOre("Beryl", x, unlock_price_progression[1], "Solaris Spires")
 new AsteroidOre("Bismutite", x, unlock_price_progression[2], "Solaris Spires")
 new AsteroidOre("Cuprosklodowskite", x, unlock_price_progression[3], "Solaris Spires")
@@ -1124,8 +1141,9 @@ new AsteroidOre("Galenobismutite", x, unlock_price_progression[20], "Solaris Spi
 new AsteroidOre("Cryolite", x, unlock_price_progression[21], "Solaris Spires")
 new AsteroidOre("Cervantite", x, unlock_price_progression[22], "Solaris Spires")
 new AsteroidOre("Glauconite", x, unlock_price_progression[23], "Solaris Spires")
-new AsteroidOre("Pentlandite", x, unlock_price_progression[24], "Solaris Spires")
+new AsteroidOre("Aquazonite", x, unlock_price_progression[24], "Solaris Spires")
 new AsteroidOre("Hornblende", x, unlock_price_progression[25], "Solaris Spires")
+
 new AsteroidOre("Garnet", x, unlock_price_progression[1], "Celestial Labyrinth")
 new AsteroidOre("Realgar", x, unlock_price_progression[2], "Celestial Labyrinth")
 new AsteroidOre("Epsomite", x, unlock_price_progression[3], "Celestial Labyrinth")
@@ -1138,48 +1156,53 @@ new AsteroidOre("Dolomite", x, unlock_price_progression[9], "Celestial Labyrinth
 new AsteroidOre("Fayalite", x, unlock_price_progression[10], "Celestial Labyrinth")
 new AsteroidOre("Tantalite", x, unlock_price_progression[11], "Celestial Labyrinth")
 new AsteroidOre("Trona", x, unlock_price_progression[12], "Celestial Labyrinth")
-new AsteroidOre("Fayalite", x, unlock_price_progression[13], "Celestial Labyrinth")
+new AsteroidOre("Magnetarite", x, unlock_price_progression[13], "Celestial Labyrinth")
 new AsteroidOre("Celsian", x, unlock_price_progression[14], "Celestial Labyrinth")
 new AsteroidOre("Apatite", x, unlock_price_progression[15], "Celestial Labyrinth")
 new AsteroidOre("Danburite", x, unlock_price_progression[16], "Celestial Labyrinth")
-new AsteroidOre("Rhodochrosite", x, unlock_price_progression[17], "Celestial Labyrinth")
+new AsteroidOre("Iridexite", x, unlock_price_progression[17], "Celestial Labyrinth")
 new AsteroidOre("Cobaltite", x, unlock_price_progression[18], "Celestial Labyrinth")
-new AsteroidOre("Cryolite", x, unlock_price_progression[19], "Celestial Labyrinth")
+new AsteroidOre("Radiarisite", x, unlock_price_progression[19], "Celestial Labyrinth")
 new AsteroidOre("Cylindrite", x, unlock_price_progression[20], "Celestial Labyrinth")
 new AsteroidOre("Argentopyrite", x, unlock_price_progression[21], "Celestial Labyrinth")
 new AsteroidOre("Jamesonite", x, unlock_price_progression[22], "Celestial Labyrinth")
 new AsteroidOre("Nagyagite", x, unlock_price_progression[23], "Celestial Labyrinth")
 new AsteroidOre("Marcasite", x, unlock_price_progression[24], "Celestial Labyrinth")
 new AsteroidOre("Clausthalite", x, unlock_price_progression[25], "Celestial Labyrinth")
+
 new AsteroidOre("Fuchsite", x, unlock_price_progression[1], "Starshatter Rift")
 new AsteroidOre("Forsterite", x, unlock_price_progression[2], "Starshatter Rift")
 new AsteroidOre("Annabergite", x, unlock_price_progression[3], "Starshatter Rift")
-new AsteroidOre("Chromite", x, unlock_price_progression[4], "Starshatter Rift")
-new AsteroidOre("Cobaltite", x, unlock_price_progression[5], "Starshatter Rift")
-new AsteroidOre("Scheelite", x, unlock_price_progression[6], "Starshatter Rift")
-new AsteroidOre("Sperrylite", x, unlock_price_progression[7], "Starshatter Rift")
+new AsteroidOre("Zephyrosium", x, unlock_price_progression[4], "Starshatter Rift")
+new AsteroidOre("Chronarite", x, unlock_price_progression[5], "Starshatter Rift")
+new AsteroidOre("Voltarite", x, unlock_price_progression[6], "Starshatter Rift")
+new AsteroidOre("Plasmaquartz", x, unlock_price_progression[7], "Starshatter Rift")
 new AsteroidOre("Uvarovite", x, unlock_price_progression[8], "Starshatter Rift")
-new AsteroidOre("Calaverite", x, unlock_price_progression[9], "Starshatter Rift")
+new AsteroidOre("Auranite", x, unlock_price_progression[9], "Starshatter Rift")
 new AsteroidOre("Matildite", x, unlock_price_progression[10], "Starshatter Rift")
 new AsteroidOre("Polybasite", x, unlock_price_progression[11], "Starshatter Rift")
 new AsteroidOre("Langisite", x, unlock_price_progression[12], "Starshatter Rift")
-new AsteroidOre("Sylvanite", x, unlock_price_progression[13], "Starshatter Rift")
-new AsteroidOre("Wolframite", x, unlock_price_progression[14], "Starshatter Rift")
-new AsteroidOre("Rutile", x, unlock_price_progression[15], "Starshatter Rift")
+new AsteroidOre("Xyronyx", x, unlock_price_progression[13], "Starshatter Rift")
+new AsteroidOre("Prismarionyx", x, unlock_price_progression[14], "Starshatter Rift")
+new AsteroidOre("Celestroxite", x, unlock_price_progression[15], "Starshatter Rift")
 new AsteroidOre("Hessite", x, unlock_price_progression[16], "Starshatter Rift")
-new AsteroidOre("Periclase", x, unlock_price_progression[17], "Starshatter Rift")
-new AsteroidOre("Dolomite", x, unlock_price_progression[18], "Starshatter Rift")
-new AsteroidOre("Fayalite", x, unlock_price_progression[19], "Starshatter Rift")
-new AsteroidOre("Tantalite", x, unlock_price_progression[20], "Starshatter Rift")
-new AsteroidOre("Trona", x, unlock_price_progression[21], "Starshatter Rift")
-new AsteroidOre("Fayalite", x, unlock_price_progression[22], "Starshatter Rift")
-new AsteroidOre("Celsian", x, unlock_price_progression[23], "Starshatter Rift")
-new AsteroidOre("Apatite", x, unlock_price_progression[24], "Starshatter Rift")
-new AsteroidOre("Danburite", x, unlock_price_progression[25], "Starshatter Rift")
+new AsteroidOre("Magnetarionyx", x, unlock_price_progression[17], "Starshatter Rift")
+new AsteroidOre("Crysalite", x, unlock_price_progression[18], "Starshatter Rift")
+new AsteroidOre("Pyrofrostite", x, unlock_price_progression[19], "Starshatter Rift")
+new AsteroidOre("Iridionyx", x, unlock_price_progression[20], "Starshatter Rift")
+new AsteroidOre("Gravitite", x, unlock_price_progression[21], "Starshatter Rift")
+new AsteroidOre("Aetherionyx", x, unlock_price_progression[22], "Starshatter Rift")
+new AsteroidOre("Cosmocite", x, unlock_price_progression[23], "Starshatter Rift")
+new AsteroidOre("Ignitionyx", x, unlock_price_progression[24], "Starshatter Rift")
+new AsteroidOre("Xenonite", x, unlock_price_progression[25], "Starshatter Rift")
 
 
-q.asteroid.Stone.unlocked = true
-q.asteroid.A.unlocked = true
+q.asteroid.Stone.unlocked = true;
+q.asteroid.Stibnite.unlocked = true;
+q.asteroid.Beryl.unlocked = true;
+q.asteroid.Garnet.unlocked = true;
+q.asteroid.Fuchsite.unlocked = true;
+
 
 new AsteroidOreUpgrade("1.5",1.5,12)
 new AsteroidOreUpgrade("2",2,25)
