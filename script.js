@@ -326,8 +326,8 @@ class AsteroidOre {
         q.asteroid[name] = {
             value: value,
             originalValue: value,
-            cost: value * 25,
-            originalCost: value*25,
+            cost: value * 5,
+            originalCost: value*5,
             unlocked: false,
             clicked: false,
             progress: 0,
@@ -1046,11 +1046,11 @@ new factory(`mars_mk8`,1500000000000000,"mars",`page4`)
 new factory(`mars_mk9`,27000000000000000,"mars",`page4`)
 new factory(`mars_mk10`,1500000000000000000,"mars",`page4`)
 
-new AsteroidBelt("Asterothoria Belt",50)
-new AsteroidBelt("Meteorium Maze",50)
-new AsteroidBelt("Solaris Spires",50)
-new AsteroidBelt("Celestial Labyrinth",50)
-new AsteroidBelt("Starshatter Rift",50)
+new AsteroidBelt("Asterothoria Belt",10**26)
+new AsteroidBelt("Meteorium Maze",10**52)
+new AsteroidBelt("Solaris Spires",10**78)
+new AsteroidBelt("Celestial Labyrinth",10**104)
+new AsteroidBelt("Starshatter Rift",10**130)
 
 q.asteroid.asteroidBelts["Asterothoria Belt"].purchased = true
 unlock_price_progression = [0, 100, 500, 1000, 2000, 3750, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 75000, 100000, 125000, 150000, 200000, 250000, 275000, 300000, 325000]
@@ -1113,25 +1113,11 @@ q.asteroid.Beryl.unlocked = true;
 q.asteroid.Garnet.unlocked = true;
 q.asteroid.Fuchsite.unlocked = true;
 
+new AsteroidOreUpgrade("1.5",1.5,20)
 
-new AsteroidOreUpgrade("1.5",1.5,12)
-new AsteroidOreUpgrade("2",2,25)
-new AsteroidOreUpgrade("2.5",2.5,25)
-new AsteroidOreUpgrade("3",3,50)
-new AsteroidOreUpgrade("3.5",3.5,100)
-new AsteroidOreUpgrade("4",4,25)
-new AsteroidOreUpgrade("4.5",4.5,125)
-new AsteroidOreUpgrade("5",5,25)
-new AsteroidOreUpgrade("5.5",5.5,150)
-new AsteroidOreUpgrade("6",6,25)
-new AsteroidOreUpgrade("6.5",6.5,225)
-new AsteroidOreUpgrade("7",7,25)
-new AsteroidOreUpgrade("7.5",7.5,250)
-new AsteroidOreUpgrade("8",8,25)
-new AsteroidOreUpgrade("8.5",8.5,275)
-new AsteroidOreUpgrade("9",9,25)
-new AsteroidOreUpgrade("9.5",9.5,300)
-new AsteroidOreUpgrade("10",10,325)
+for (var i = 4;i<21;i++) {
+    new AsteroidOreUpgrade(String(i*0.5),i*0.5,(i-3)*25)
+}
 
 
 
@@ -1142,7 +1128,7 @@ document.querySelector(".earthpage2factories").appendChild(br)
 const stock = JSON.parse(JSON.stringify(q))
 
 var planet = 0
-var asteroid = 1
+var asteroid = 0
 
 var gameLoaded = false
 var setDifficultyPageLoaded = false
@@ -1274,7 +1260,7 @@ function loadAsteroidHtml(name) {
 }
 
 function ie() {
-    for (var i = 2; i <= 100; i++){
+    for (var i = 2; i <= 5; i++){
         var button = `<button class="upgradeButton unlock_${i}_astroids" onclick="researchAsteroidAmount(${i})">Mine ${i} asteroids</button>`
 
         document.querySelector(".asteroidResearchsubmenus").innerHTML += button
@@ -1285,8 +1271,6 @@ function ie() {
 function l(name, div) {
 
     for (var n of q[q.asteroid.belt+"Ores"]) {
-        q.asteroid.asteroids[name][n].clicked = false
-
         var set = document.createElement("div")
         set.id = name + "_"+ capitalizeFirstLetter(n) + "_set"
         set.className = "set"
@@ -1336,7 +1320,9 @@ function asteroidOreUpgrade(upgrade,asteroid_name, ore_name){
         q.asteroid.money -= theUpgrade.cost
         theUpgrade.purchased = true
 
-        ore.multiplier *= theUpgrade.multiplier
+
+        ore.value /= ore.multiplier
+        ore.multiplier = theUpgrade.multiplier
         ore.value *= theUpgrade.multiplier
     }
     else {
@@ -1374,8 +1360,7 @@ function researchAsteroidOre(asteroid_name, ore_name){
     var ore = q.asteroid.asteroids[asteroid_name][ore_name]
     var previousOreName = getPreviousOre(ore_name)
     var previousOre = q.asteroid.asteroids[asteroid_name][previousOreName]
-    console.log(previousOreName,previousOre)
-    
+
     if (ore.unlocked == true) {return}
     if (previousOre.unlocked == false) {customAlert(`You need to unlock ${previousOreName} first!`);return}
     if (previousOre.level < 20) {customAlert(`${capitalizeFirstLetter(previousOreName)} needs to be level 20! It is currently level ${previousOre.level}!`); return}
@@ -2212,7 +2197,7 @@ function displayStats() {
         //if asteroids visble
         else {
 
-            document.querySelector(".asteroidDisplay").innerHTML = `Asteroid Belt: ${q.asteroid.belt}`
+            document.querySelector(".asteroidBeltDisplay").innerHTML = `Asteroid Belt: ${q.asteroid.belt}`
             for (var asteroidbelt of q.asteroidBelts) {
                 if (q.asteroid.asteroidBelts[asteroidbelt].purchased) {
                     document.querySelector(`.${String(asteroidbelt).replaceAll(" ","")+"Buy"}`).style.display = "none"
@@ -2225,7 +2210,7 @@ function displayStats() {
             for (var upgrade of q.asteroidOreUpgrades) {
                 for (var a of q.asteroids) {
                     for (var ore in q.asteroid.asteroids[a]){
-                        document.querySelector(`.${a}_${ore}_click`).innerHTML = `$${num2txt(q.asteroid.asteroids[a][ore].value)}`
+                        document.querySelector(`.${a}_${ore}_click`).innerHTML = `$${num2txt(Math.floor(q.asteroid.asteroids[a][ore].value))}`
                         
                         if (q.asteroid.asteroids[a][ore].auto) {
                             var selector = `.${a}automate${capitalizeFirstLetter(ore)}Buy`
@@ -3219,7 +3204,7 @@ setIntervul(function(){
             if (ore.clicked == false) {continue}
 
             var t = Math.floor(ore.time)
-            ore.timePassed += 500
+            ore.timePassed += 1000
 
             width = Math.floor((ore.timePassed/ore.time)*100)
             ore.progress = width
@@ -3240,7 +3225,7 @@ setIntervul(function(){
             } 
         }
     }
-},500)
+},1000)
 
 
 

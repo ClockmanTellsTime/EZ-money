@@ -11,6 +11,11 @@
     bottom: 0px;
 }
 
+
+.moonMoneyDisplay, .moonPopulationDisplay, .moonFoodDisplay, .moonWaterDisplay, .moonEnergyDisplay {
+    color: white;
+}
+
 button {
     cursor: pointer;
 }
