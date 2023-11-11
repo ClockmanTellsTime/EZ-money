@@ -3196,7 +3196,6 @@ setIntervul(function(){
 
 
 setIntervul(function(){
-
     for(var a of q.asteroids) {
         for (var o of q[q.asteroid.belt+"Ores"]) {
             var ore = q.asteroid.asteroids[a][o]
@@ -3209,11 +3208,11 @@ setIntervul(function(){
             width = Math.floor((ore.timePassed/ore.time)*100)
             ore.progress = width
 
-
+            var progressbar = document.querySelector("."+a+"_"+o+"_fill")
 
             //just for preformance
             if (a == q.asteroids[asteroid-1]) {
-                document.querySelector("."+a+"_"+o+"_fill").style.width = width+"%"
+                progressbar.style.width = width+"%"
             }
 
             if (ore.timePassed >= t + 100) {
@@ -3221,7 +3220,7 @@ setIntervul(function(){
                 ore.clicked = false
                 q.asteroid.money += ore.value
                 q.asteroid.research += 50
-                document.querySelector("."+a+"_"+o+"_fill").style.width = "0%"
+                progressbar.style.width = "0%"
             } 
         }
     }
