@@ -326,8 +326,8 @@ class AsteroidOre {
         q.asteroid[name] = {
             value: value,
             originalValue: value,
-            cost: value * 5,
-            originalCost: value*5,
+            cost: value * 5 * q[difficulty],
+            originalCost: value * 5 * q[difficulty],
             unlocked: false,
             clicked: false,
             progress: 0,
@@ -2542,8 +2542,11 @@ function ascend() {
 
     $(".game").fadeOut(1000,function() {
         var ascendStats = JSON.parse(JSON.stringify(q.ascend))
+        var asteroidStats = JSON.parse(JSON.stringify(q.asteroid))
 
         q = JSON.parse(JSON.stringify(stock))
+        
+        q.asteroid = asteroidStats
 
         q.ascend = ascendStats
 
@@ -2623,14 +2626,6 @@ function ascend() {
 //     fetch("https://clockmannevertoldtime.pythonanywhere.com/cloudSaves?user=" + usr).then( save => save.json() ).then( save => {
 //         if (save != "error" && Object.keys(save[difficulty]).length != 0){
 //             deepMerge(q,save[difficulty])
-//             q.earth.factories = JSON.parse(JSON.stringify(stock.earth.factories))
-//             q.earth.factories = JSON.parse(JSON.stringify(stock.earth.factories))
-//             q.earth.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-//             q.moon.autoPrint = {on: false, cost: 100000 * q[difficulty]}
-//             q.moon.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-//             q.mars.autoPrint = {on: false, cost: 100000 * q[difficulty]}
-//             q.mars.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-//             q.earth.autoPrint = {on: false, cost: 100000 * q[difficulty]}
 //         }
 //     })
 //     setIntervul(function () { save() }, 1000)
@@ -2643,14 +2638,6 @@ function save() {
 function load() {
     var data = JSON.parse(localStorage.getItem("data"+difficulty))
     deepMerge(q,data)
-    q.earth.factories = JSON.parse(JSON.stringify(stock.earth.factories))
-    q.earth.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-    q.moon.autoPrint = {on: false, cost: 100000 * q[difficulty]}
-    q.moon.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-    q.mars.autoPrint = {on: false, cost: 100000 * q[difficulty]}
-    q.mars.autoUpgrade = {on: false, cost: 10000 * q[difficulty]}
-    q.earth.autoPrint = {on: false, cost: 100000 * q[difficulty]}
-
     setIntervul(function () { save() }, 1000)
 }
 
