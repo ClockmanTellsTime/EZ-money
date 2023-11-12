@@ -1061,10 +1061,13 @@ var x = 10
 
 
 var ores1 = ["Stone","Copper","Iron","Silver","Steel","Gold","Topaz","Amethyst","Ruby","Sapphire","Emerald","Quartz","Hematite","Galena","Chalcopyrite","Magnetite","Sphalerite","Pyrolusite","Malachite","Bornite","Covellite","Cassiterite","Ilmenite","Bauxite","Rhodochrosite"]
-var ores2 = ["Stibnite","Azurite","Cinnabar","Fluorite","Gypsum","Scheelite","Barite","Bastnäsite","Chromite","Wolframite","Molybdenite","Kaolinite","Rutile","Carnotite","Pentlandite","Millerite","Sperrylite","Siderite","Goethite","Arsenopyrite","Bismuthinite","Cuprite","Tenorite","Wurtzite","Tetrahedrite"]
+var ores2 = ["Stibnite","Azurite","Cinnabar","Fluorite","Gypsum","Scheelite","Barite","Bastnasite","Chromite","Wolframite","Molybdenite","Kaolinite","Rutile","Carnotite","Pentlandite","Millerite","Sperrylite","Siderite","Goethite","Arsenopyrite","Bismuthinite","Cuprite","Tenorite","Wurtzite","Tetrahedrite"]
 var ores3 = ["Beryl","Bismutite","Cuprosklodowskite","Siderazot","Chromitite","Manganite","Calaverite","Rhodonite","Zoisite","Lepidolite","Sodalite","Serpentine","Olivine","Smithsonite","Enargite","Chrysocolla","Cerussite","Aragonite","Celestite","Galenobismutite","Cryolite","Cervantite","Glauconite","Aquazonite","Hornblende"]
 var ores4 = ["Garnet","Realgar","Epsomite","Ammolite","Sylvite","Halite","Sylvanite","Periclase","Dolomite","Fayalite","Tantalite","Trona","Magnetarite","Celsian","Apatite","Danburite","Iridexite","Cobaltite","Radiarisite","Cylindrite","Argentopyrite","Jamesonite","Nagyagite","Marcasite","Clausthalite"]
 var ores5 = ["Fuchsite","Forsterite","Annabergite","Zephyrosium","Chronarite","Voltarite","Plasmaquartz","Uvarovite","Auranite","Matildite","Polybasite","Langisite","Xyronyx","Prismarionyx","Celestroxite","Hessite","Magnetarionyx","Crysalite","Pyrofrostite","Iridionyx","Gravitite","Aetherionyx","Cosmocite","Ignitionyx","Xenonite"]
+
+
+
 
 var valuething = 0
 var indexthing = 0
