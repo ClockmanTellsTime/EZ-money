@@ -358,7 +358,7 @@ class AsteroidOreUpgrade {
 }
 
 var q = {
-
+    cache: 1,   
     asteroid: {
         belt: "Asterothoria Belt",
         money: 0,
@@ -2626,6 +2626,11 @@ function ascend() {
 //     fetch("https://clockmannevertoldtime.pythonanywhere.com/cloudSaves?user=" + usr).then( save => save.json() ).then( save => {
 //         if (save != "error" && Object.keys(save[difficulty]).length != 0){
 //             deepMerge(q,save[difficulty])
+
+//             if (q["cache"] == undefined) {
+//                 q["cache"] = "1"
+//                 q.asteroid = JSON.parse(JSON.stringify(stock.asteroid))
+//             }
 //         }
 //     })
 //     setIntervul(function () { save() }, 1000)
@@ -2638,6 +2643,12 @@ function save() {
 function load() {
     var data = JSON.parse(localStorage.getItem("data"+difficulty))
     deepMerge(q,data)
+
+    if (q["cache"] == undefined) {
+        q["cache"] = "1"
+        q.asteroid = JSON.parse(JSON.stringify(stock.asteroid))
+    }
+
     setIntervul(function () { save() }, 1000)
 }
 
@@ -2773,7 +2784,10 @@ function generateRandomString() {
 function deepMerge(obj1, obj2) {
     for (const key in obj2) {
       if (obj2.hasOwnProperty(key)) {
-        if (typeof obj2[key] === 'object' && obj2[key] !== null) {
+        if (Array.isArray(obj2[key])) {
+          // If the property is an array, keep the array from obj1
+          obj1[key] = obj1[key] || [];
+        } else if (typeof obj2[key] === 'object' && obj2[key] !== null) {
           if (!obj1[key] || typeof obj1[key] !== 'object') {
             obj1[key] = {};
           }
@@ -2784,6 +2798,7 @@ function deepMerge(obj1, obj2) {
       }
     }
   }
+  
 
 function prestigeUpgrade(upgrade,planet) {
     if (q[planet].prestige.prestigeTokens < q[planet].prestige[upgrade].cost) {
