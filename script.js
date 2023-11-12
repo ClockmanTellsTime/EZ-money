@@ -326,8 +326,8 @@ class AsteroidOre {
         q.asteroid[name] = {
             value: value,
             originalValue: value,
-            cost: value * 5 * q[difficulty],
-            originalCost: value * 5 * q[difficulty],
+            cost: value * 5,
+            originalCost: value * 5,
             unlocked: false,
             clicked: false,
             progress: 0,
