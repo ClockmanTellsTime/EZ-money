@@ -2784,7 +2784,7 @@ function generateRandomString() {
 function deepMerge(obj1, obj2) {
     for (const key in obj2) {
       if (obj2.hasOwnProperty(key)) {
-        if (Array.isArray(obj2[key])) {
+        if (Array.isArray(obj2[key]) & key != "asteroids") {
           // If the property is an array, keep the array from obj1
           obj1[key] = obj1[key] || [];
         } else if (typeof obj2[key] === 'object' && obj2[key] !== null) {
