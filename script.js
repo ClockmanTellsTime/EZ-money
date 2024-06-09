@@ -108,7 +108,7 @@ document.addEventListener("keydown", event => {
     }
 })
 
-function setIntervul(callback, timeout,key) {
+function setIntervul(callback, timeout) {
     setInterval(() => {
         if (gameLoaded) {
             callback()
@@ -135,7 +135,7 @@ class AsteroidBelt {
 }
 
 function buyAsteroidBelt(name) {
-    if (q.asteroid.money <= q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
+    if (q.asteroid.money < q.asteroid.asteroidBelts[name].cost) {customAlert(`You need $${num2txt(q.asteroid.asteroidBelts[name].cost - q.asteroid.money)} more to do this!`);return}
     if (q.asteroid.asteroidBelts[name].purchased) {return}
 
 
@@ -1054,17 +1054,17 @@ new AsteroidBelt("Starshatter Rift",10**130)
 
 q.asteroid.asteroidBelts["Asterothoria Belt"].purchased = true
 unlock_price_progression = [0, 100, 500, 1000, 2000, 3750, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 75000, 100000, 125000, 150000, 200000, 250000, 275000, 300000, 325000]
-value_progression = [1,2.5,3.75,6.25,8.9]
+value_progression = [1,2.5,3.75,6.25,8.9, 10]
 
 var x = 10
 
 
 
-var ores1 = ["Stone","Copper","Iron","Silver","Steel","Gold","Topaz","Amethyst","Ruby","Sapphire","Emerald","Quartz","Hematite","Galena","Chalcopyrite","Magnetite","Sphalerite","Pyrolusite","Malachite","Bornite","Covellite","Cassiterite","Ilmenite","Bauxite","Rhodochrosite"]
-var ores2 = ["Stibnite","Azurite","Cinnabar","Fluorite","Gypsum","Scheelite","Barite","Bastnasite","Chromite","Wolframite","Molybdenite","Kaolinite","Rutile","Carnotite","Pentlandite","Millerite","Sperrylite","Siderite","Goethite","Arsenopyrite","Bismuthinite","Cuprite","Tenorite","Wurtzite","Tetrahedrite"]
-var ores3 = ["Beryl","Bismutite","Cuprosklodowskite","Siderazot","Chromitite","Manganite","Calaverite","Rhodonite","Zoisite","Lepidolite","Sodalite","Serpentine","Olivine","Smithsonite","Enargite","Chrysocolla","Cerussite","Aragonite","Celestite","Galenobismutite","Cryolite","Cervantite","Glauconite","Aquazonite","Hornblende"]
-var ores4 = ["Garnet","Realgar","Epsomite","Ammolite","Sylvite","Halite","Sylvanite","Periclase","Dolomite","Fayalite","Tantalite","Trona","Magnetarite","Celsian","Apatite","Danburite","Iridexite","Cobaltite","Radiarisite","Cylindrite","Argentopyrite","Jamesonite","Nagyagite","Marcasite","Clausthalite"]
-var ores5 = ["Fuchsite","Forsterite","Annabergite","Zephyrosium","Chronarite","Voltarite","Plasmaquartz","Uvarovite","Auranite","Matildite","Polybasite","Langisite","Xyronyx","Prismarionyx","Celestroxite","Hessite","Magnetarionyx","Crysalite","Pyrofrostite","Iridionyx","Gravitite","Aetherionyx","Cosmocite","Ignitionyx","Xenonite"]
+var ores1 = ["Stone","Copper","Iron","Silver","Steel","Gold","Topaz","Amethyst","Ruby","Sapphire","Emerald","Quartz"]
+var ores2 = ["Stibnite","Azurite","Cinnabar","Fluorite","Gypsum","Scheelite","Barite","Bastnasite","Chromite","Wolframite","Molybdenite","Kaolinite","Rutile"]
+var ores3 = ["Beryl","Bismutite","Cuprosklodowskite","Siderazot","Chromitite","Manganite","Calaverite","Rhodonite","Zoisite","Lepidolite","Sodalite","Serpentine","Olivine","Smithsonite"]
+var ores4 = ["Garnet","Realgar","Epsomite","Ammolite","Sylvite","Halite","Sylvanite","Periclase","Dolomite","Fayalite","Tantalite","Trona","Magnetarite","Celsian","Apatite","Danburite","Iridexite"]
+var ores5 = ["Fuchsite","Forsterite","Annabergite","Zephyrosium","Chronarite","Voltarite","Plasmaquartz","Uvarovite","Auranite","Matildite","Polybasite","Langisite","Xyronyx","Prismarionyx","Celestroxite"]
 
 
 
@@ -1073,7 +1073,7 @@ var valuething = 0
 var indexthing = 0
 
 for (var ore of ores1) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**valuething,unlock_price_progression[indexthing%25],"Asterothoria Belt")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%(ores1.length)],"Asterothoria Belt")
     valuething++;
     indexthing++;
 }
@@ -1081,7 +1081,7 @@ for (var ore of ores1) {
 valuething++
 
 for (var ore of ores2) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**valuething,unlock_price_progression[indexthing%25],"Meteorium Maze")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores2.length],"Meteorium Maze")
     valuething++;
     indexthing++;
 }
@@ -1089,7 +1089,7 @@ for (var ore of ores2) {
 valuething++
 
 for (var ore of ores3) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**valuething,unlock_price_progression[indexthing%25],"Solaris Spires")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores3.length],"Solaris Spires")
     valuething++;
     indexthing++;
 }
@@ -1097,7 +1097,7 @@ for (var ore of ores3) {
 valuething++
 
 for (var ore of ores4) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**valuething,unlock_price_progression[indexthing%25],"Celestial Labyrinth")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores4.length],"Celestial Labyrinth")
     valuething++;
     indexthing++;
 }
@@ -1105,7 +1105,7 @@ for (var ore of ores4) {
 valuething++
 
 for (var ore of ores5) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**valuething,unlock_price_progression[indexthing%25],"Starshatter Rift")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores5.length],"Starshatter Rift")
     valuething++;
     indexthing++;
 }
@@ -1176,12 +1176,10 @@ function upgrade(p="earth",alert=true) {
 }
 
 function start() {
-    customConfirm("Are you Sure? ",() => {
-        $(".start").fadeOut(800,function() {
-            document.querySelector(".difficulty").style.visibility = "visible"
-            setDifficultyPageLoaded = true
-            startScreenLoaded = false
-        })
+    $(".start").fadeOut(800,function() {
+        document.querySelector(".difficulty").style.visibility = "visible"
+        setDifficultyPageLoaded = true
+        startScreenLoaded = false
     })    
 }
 
