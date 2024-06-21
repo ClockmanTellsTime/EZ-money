@@ -368,6 +368,10 @@ var q = {
             cost: 100000,
             purchased: false,
         },
+        gasExtractor: {
+            cost: 100000,
+            purchased: false,
+        },
         asteroidBelts: {},
         asteroids: {},
         maxAsteroids: 1,
@@ -1144,6 +1148,75 @@ var menuOpened = ""
 
 /*Function*/ {
 
+function giveMoneyFromPopups(planet) {
+    q[planet].money += q[planet].click.amount * 125
+}
+
+function spawnMoneyPopups() {
+    var div = document.createElement("div")
+    div.className = `earthmoneyClickPopup`
+
+    div.onclick = function() {
+        giveMoneyFromPopups('earth')
+        document.querySelector(".earthGround").innerHTML = ""
+    }
+    div.innerHTML = "$"
+    var x = Math.floor(Math.random() * (window.innerWidth - 50))
+    var y = Math.floor(Math.random() * (document.querySelector(".earthGround").clientHeight-50))
+
+    div.style.position = "absolute"
+    div.style.left = x + "px"
+    div.style.top = y + "px"    
+    
+    document.querySelector(".earthGround").appendChild(div)
+
+    setTimeout(function(){
+        document.querySelector(".earthGround").innerHTML = ""
+    },5000)
+
+    var div = document.createElement("div")
+    div.className = `moonmoneyClickPopup`
+
+    div.onclick = function() {
+        giveMoneyFromPopups('moon')
+        document.querySelector(".moonGround").innerHTML = ""
+    }
+    div.innerHTML = "$"
+    var x = Math.floor(Math.random() * (window.innerWidth - 50))
+    var y = Math.floor(Math.random() * (document.querySelector(".moonGround").clientHeight-50))
+
+    div.style.position = "absolute"
+    div.style.left = x + "px"
+    div.style.top = y + "px"    
+    
+    document.querySelector(".moonGround").appendChild(div)
+
+    setTimeout(function(){
+        document.querySelector(".moonGround").innerHTML = ""
+    },5000)
+
+    var div = document.createElement("div")
+    div.className = `marsmoneyClickPopup`
+
+    div.onclick = function() {
+        giveMoneyFromPopups('mars')
+        document.querySelector(".marsGround").innerHTML = ""
+    }
+    div.innerHTML = "$"
+    var x = Math.floor(Math.random() * (window.innerWidth - 50))
+    var y = Math.floor(Math.random() * (document.querySelector(".marsGround").clientHeight-50))
+
+    div.style.position = "absolute"
+    div.style.left = x + "px"
+    div.style.top = y + "px"    
+    
+    document.querySelector(".marsGround").appendChild(div)
+
+    setTimeout(function(){
+        document.querySelector(".marsGround").innerHTML = ""
+    },5000)
+}
+
 function giveMoney(planet) {
     q[planet].money += q[planet].click.amount * q[planet].prestige.multiplier.amount * q.ascend[planet].multiplier.amount;
 
@@ -1450,6 +1523,18 @@ function buyTrackerBeam() {
     }
     else {
         customAlert(`You need A$${num2txt(q.asteroid.trackerBeam.cost - q.ascend.tokens)} more to do this!!!!`)
+    }
+}
+
+function buyGasExtractor() {
+    if (q.asteroid.gasExtractor.purchased) {return false}
+
+    if (q.asteroid.money >= q.asteroid.gasExtractor.cost) {
+        q.asteroid.gasExtractor.purchased = true
+        q.asteroid.money -= q.asteroid.gasExtractor.cost
+    }
+    else {
+        customAlert(`You need U$${num2txt(q.asteroid.gasExtractor.cost - q.asteroid.money)} more to do this!!!!`)
     }
 }
 
@@ -1797,7 +1882,7 @@ function displayStats() {
             var em = q.ascend.earth.multiplier.amount
             var ef= q.earth.prestige.multiplier.amount * em
             
-
+            
             document.querySelector(".AscendDisplay").innerHTML = `Ascensions: ${q.ascend.amount}`
 
             document.querySelector(".earthMoneyDisplay").innerHTML = `Money: $${num2txt(q.earth.money)}`
@@ -2199,6 +2284,10 @@ function displayStats() {
         }
         //if asteroids visble
         else {
+            
+            if (q.asteroid.gasExtractor.purchased) {
+                document.querySelector("body > div.game > div.asteroids > div.gasMining.menu_options > div.gasMiningsubmenus.submenus > button").style.display = "none"
+            }
 
             document.querySelector(".asteroidBeltDisplay").innerHTML = `Asteroid Belt: ${q.asteroid.belt}`
             for (var asteroidbelt of q.asteroidBelts) {
@@ -2894,6 +2983,9 @@ var crazyUpdate = setIntervul(function () {
     update()
 }, 1)
 
+setIntervul(function() {
+    spawnMoneyPopups()
+},10000)
 
 //10ms
 setIntervul(function(){

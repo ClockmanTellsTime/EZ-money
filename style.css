@@ -459,6 +459,42 @@ body{
 
 }  
 
+.earthmoneyClickPopup {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: rgb(3, 74, 3);
+    color: white;
+    size: 100px;
+    justify-content: center;
+    line-height: 100px;
+}
+
+.moonmoneyClickPopup {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: rgb(47, 47, 47);
+    color: white;
+    size: 100px;
+    justify-content: center;
+    line-height: 100px;
+}
+
+.marsmoneyClickPopup {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #340808;
+    color: white;
+    size: 100px;
+    justify-content: center;
+    line-height: 100px;
+}
+
 .PrestigeProgress {
     position: relative;
     top: 5px;
