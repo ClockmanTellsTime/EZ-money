@@ -1,3 +1,5 @@
+
+
 document.addEventListener("keydown", event => {
     if (gameLoaded) {
         if (event.key.toLowerCase() == "r") {
@@ -3294,12 +3296,15 @@ function toggleAsteroidMenuVisibility(selector){
     document.querySelector(".upgrades").style.display = "none"
     document.querySelector(".automations").style.display = "none"
     document.querySelector(".asteroidBelts").style.display = "none"
+    document.querySelector(".gasMining").style.display = "none"
 
     if (style == "block") {
         document.querySelector(selector).style.display = "none"
+        document.querySelector(".blur").style.display = "none"
     }
     else {
         document.querySelector(selector).style.display = "block"
+        document.querySelector(".blur").style.display = "block"
     }
 }
 
@@ -3632,6 +3637,9 @@ document.querySelector(".moreResearchToggle").onclick = () => {
 }
 document.querySelector(".asteroidBeltToggle").onclick = () => {
     toggleAsteroidMenuVisibility(".asteroidBelts")
+}
+document.querySelector(".gasMiningToggle").onclick = () => {
+    toggleAsteroidMenuVisibility(".gasMining")
 }
 
 

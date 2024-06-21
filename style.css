@@ -12,6 +12,17 @@
 }
 
 
+.blur {
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    width: 75%;
+    left: 0%;
+    height: 100%;
+    z-index: 5;
+    display: none;
+}
+
 .moonMoneyDisplay, .moonPopulationDisplay, .moonFoodDisplay, .moonWaterDisplay, .moonEnergyDisplay {
     color: white;
 }
@@ -442,7 +453,7 @@ body{
     height: 75%;
     position: fixed ; 
     left: 30%;
-    z-index: 1;
+    z-index: 10;
     display: none;
     border-radius: 10px;
 
