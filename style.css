@@ -370,6 +370,19 @@ body{
     height: 25px;
 }
 
+.asteroidOres {
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.button2 {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    bottom: 10px;
+}
+
 .down_arrow {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;

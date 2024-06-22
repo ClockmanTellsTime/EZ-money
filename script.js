@@ -122,6 +122,7 @@ class AsteroidBelt {
     constructor(name, cost) {
         q.asteroidBelts.push(name)
         q[name+"Ores"] = []
+        q[name+"Gasses"] = []
         q.asteroid.asteroidBelts[name] = {
             cost: cost,
             purchased: false
@@ -345,6 +346,30 @@ class AsteroidOre {
     }
 }
 
+class AsteroidGas {
+    constructor(name, value, researchRequired, belt) {
+        q[belt+"Gasses"].push(name)
+        q.asteroidGasses.push(name)
+        q.asteroid[name] = {
+            value: value,
+            originalValue: value,
+            cost: value * 5,
+            originalCost: value * 5,
+            unlocked: false,
+            clicked: false,
+            progress: 0,
+            time: 5000,
+            timePassed: 0,
+            time_reduce: 100,
+            auto: false,
+            researchRequired: researchRequired,
+            level: 1,   
+            multiplier: 1,
+            upgrades: {},
+        }
+    }
+}
+
 class AsteroidOreUpgrade {
     constructor(name, multiplier, costMultiplier){
         for (var ore of q.asteroidOres) {
@@ -364,6 +389,7 @@ var q = {
     asteroid: {
         belt: "Asterothoria Belt",
         money: 0,
+        gasMoney: 0,
         trackerBeam: {
             cost: 100000,
             purchased: false,
@@ -1053,10 +1079,9 @@ new factory(`mars_mk9`,27000000000000000,"mars",`page4`)
 new factory(`mars_mk10`,1500000000000000000,"mars",`page4`)
 
 new AsteroidBelt("Asterothoria Belt",10**26)
-new AsteroidBelt("Meteorium Maze",10**52)
-new AsteroidBelt("Solaris Spires",10**78)
-new AsteroidBelt("Celestial Labyrinth",10**104)
-new AsteroidBelt("Starshatter Rift",10**130)
+new AsteroidBelt("Kuiper Belt",10**52)
+new AsteroidBelt("Oort Cloud",10**78)
+
 
 q.asteroid.asteroidBelts["Asterothoria Belt"].purchased = true
 unlock_price_progression = [0, 100, 500, 1000, 2000, 3750, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 75000, 100000, 125000, 150000, 200000, 250000, 275000, 300000, 325000]
@@ -1069,10 +1094,10 @@ var x = 10
 var ores1 = ["Stone","Copper","Iron","Silver","Steel","Gold","Topaz","Amethyst","Ruby","Sapphire","Emerald","Quartz"]
 var ores2 = ["Stibnite","Azurite","Cinnabar","Fluorite","Gypsum","Scheelite","Barite","Bastnasite","Chromite","Wolframite","Molybdenite","Kaolinite","Rutile"]
 var ores3 = ["Beryl","Bismutite","Cuprosklodowskite","Siderazot","Chromitite","Manganite","Calaverite","Rhodonite","Zoisite","Lepidolite","Sodalite","Serpentine","Olivine","Smithsonite"]
-var ores4 = ["Garnet","Realgar","Epsomite","Ammolite","Sylvite","Halite","Sylvanite","Periclase","Dolomite","Fayalite","Tantalite","Trona","Magnetarite","Celsian","Apatite","Danburite","Iridexite"]
-var ores5 = ["Fuchsite","Forsterite","Annabergite","Zephyrosium","Chronarite","Voltarite","Plasmaquartz","Uvarovite","Auranite","Matildite","Polybasite","Langisite","Xyronyx","Prismarionyx","Celestroxite"]
 
-
+var gas1 = ["Zephyrlight","Noxvapor","Flaremist","Aetherglow","Mystril"]
+var gas2 = ["Voltanis","Pyralume","Glimbrume","Helitwirl","Luminara"]
+var gas3 = ["Azurveil","Nephor","Quirios","Sporaflare","Xenowisp"]
 
 
 var valuething = 0
@@ -1100,21 +1125,7 @@ for (var ore of ores3) {
     indexthing++;
 }
 
-valuething++
 
-for (var ore of ores4) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores4.length],"Celestial Labyrinth")
-    valuething++;
-    indexthing++;
-}
-
-valuething++
-
-for (var ore of ores5) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores5.length],"Starshatter Rift")
-    valuething++;
-    indexthing++;
-}
 
 q.asteroid.Stone.unlocked = true;
 q.asteroid.Stibnite.unlocked = true;
@@ -1316,6 +1327,10 @@ function loadAsteroidHtml(name) {
     var div = document.createElement("div")
     div.className = name
     div.classList.add("asteroid")
+    div.innerHTML = `
+    <div class='${name}Ores asteroidOres'></div>
+    <div class='${name}Gasses asteroidOres'></div>
+    `
 
     document.querySelector(".asteroids > .asteroids").appendChild(div)
 
@@ -1332,7 +1347,7 @@ function loadAsteroidHtml(name) {
             document.querySelector(".moreResearchsubmenus > ."+name+"submenu").innerHTML += button
         }
     }
-    l(name, div)
+    l(name, document.querySelector(`.${name}Ores`))
 }
 
 function ie() {
@@ -1658,7 +1673,12 @@ function updateAsteroid() {
         document.querySelector(".buttons2").style.display = "block"
     }
 
-    if (asteroid == 0) {return}    
+ 
+    document.querySelector(".changeAsteroidUp").style.display = ""
+    document.querySelector(".changeAsteroidDown").style.display = ""
+
+    if (asteroid == 0) {document.querySelector(".changeAsteroidUp").style.display = "none";return}   
+    else if (asteroid == q.asteroids.length) {document.querySelector(".changeAsteroidDown").style.display = "none"} 
 
 
     if (asteroid_name == undefined) {asteroid = q.asteroids.length;return}
@@ -2348,6 +2368,7 @@ function displayStats() {
             
             
             document.querySelector(".asteroidMoneyDisplay").innerHTML = `U$: ${num2txt(Math.floor(q.asteroid.money))}`
+            document.querySelector(".asteroidGasMoneyDisplay").innerHTML = `G$: ${num2txt(Math.floor(q.asteroid.gasMoney))}`
             document.querySelector(".asteroidResearchDisplay").innerHTML = `R$: ${num2txt(Math.floor(q.asteroid.research))}`
             document.querySelector(".asteroidDisplay").innerHTML = `Asteroid: ${q.asteroids[asteroid-1]}`
     
