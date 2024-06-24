@@ -162,6 +162,12 @@ class Asteroid {
             q.asteroid.asteroids[name][asteroidOre] = JSON.parse(JSON.stringify(q.asteroid[asteroidOre]))
         }
 
+        for (var asteroidOre of q[belt+"Gasses"]) {
+            q.asteroid.asteroids[name][asteroidOre] = JSON.parse(JSON.stringify(q.asteroid[asteroidOre]))
+        }
+
+        
+
         loadAsteroidHtml(name)
 
     }
@@ -373,6 +379,14 @@ class AsteroidGas {
 class AsteroidOreUpgrade {
     constructor(name, multiplier, costMultiplier){
         for (var ore of q.asteroidOres) {
+            q.asteroid[ore].upgrades[name] = {
+                cost: q.asteroid[ore].cost*costMultiplier,
+                multiplier: multiplier,
+                purchased: false
+            }
+        }
+
+        for (var ore of q.asteroidGasses) {
             q.asteroid[ore].upgrades[name] = {
                 cost: q.asteroid[ore].cost*costMultiplier,
                 multiplier: multiplier,
@@ -724,6 +738,7 @@ var q = {
     planets: ["earth"],
     asteroids: [],
     asteroidOres: [],
+    asteroidGasses: [],
     asteroidOreUpgrades: [],
     asteroidBelts: [],
 
@@ -1103,6 +1118,9 @@ var gas3 = ["Azurveil","Nephor","Quirios","Sporaflare","Xenowisp"]
 var valuething = 0
 var indexthing = 0
 
+var valuething1 = 0
+var indexthing1 = 0
+
 for (var ore of ores1) {
     new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%(ores1.length)],"Asterothoria Belt")
     valuething++;
@@ -1112,7 +1130,7 @@ for (var ore of ores1) {
 valuething++
 
 for (var ore of ores2) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores2.length],"Meteorium Maze")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores2.length],"Kuiper Belt")
     valuething++;
     indexthing++;
 }
@@ -1120,9 +1138,31 @@ for (var ore of ores2) {
 valuething++
 
 for (var ore of ores3) {
-    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores3.length],"Solaris Spires")
+    new AsteroidOre(ore,value_progression[indexthing%6] * 10**(Math.ceil(valuething/2)),unlock_price_progression[indexthing%ores3.length],"Oort Cloud")
     valuething++;
     indexthing++;
+}
+
+for (var gas of gas1) {
+    new AsteroidGas(gas,value_progression[indexthing1%6] * 10**(Math.ceil(valuething1/2)),unlock_price_progression[indexthing1%(gas1.length)],"Asterothoria Belt")
+    valuething1++;
+    indexthing1++;
+}
+
+valuething1++
+
+for (var gas of gas2) {
+    new AsteroidGas(gas,value_progression[indexthing1%6] * 10**(Math.ceil(valuething1/2)),unlock_price_progression[indexthing1%gas2.length],"Kuiper Belt")
+    valuething1++;
+    indexthing1++;
+}
+
+valuething++
+
+for (var gas of gas3) {
+    new AsteroidGas(gas,value_progression[indexthing1%6] * 10**(Math.ceil(valuething1/2)),unlock_price_progression[indexthing1%gas3.length],"Oort Cloud")
+    valuething1++;
+    indexthing1++;
 }
 
 
@@ -1130,8 +1170,11 @@ for (var ore of ores3) {
 q.asteroid.Stone.unlocked = true;
 q.asteroid.Stibnite.unlocked = true;
 q.asteroid.Beryl.unlocked = true;
-q.asteroid.Garnet.unlocked = true;
-q.asteroid.Fuchsite.unlocked = true;
+
+q.asteroid.Zephyrlight.unlocked = true
+q.asteroid.Voltanis.unlocked = true
+q.asteroid.Azurveil.unlocked = true
+
 
 new AsteroidOreUpgrade("1.5",1.5,20)
 
@@ -1334,19 +1377,13 @@ function loadAsteroidHtml(name) {
 
     document.querySelector(".asteroids > .asteroids").appendChild(div)
 
-    var automations = `<div class="submenu ${name+"submenu"}"></div>`
+    var automations = `<div class="submenu ${name+"submenu"}"><div class="ores"><br><br></div><div class="gasses"></div></div>`
 
     document.querySelector(".automationsubmenus").innerHTML += automations
     document.querySelector(".upgradessubmenus").innerHTML += automations
     document.querySelector(".oreResearchsubmenus").innerHTML += automations
     document.querySelector(".moreResearchsubmenus").innerHTML += automations
 
-    for (var upgrade of q.asteroidOreUpgrades) {
-        for (var ore of q[q.asteroid.belt+"Ores"]) {
-            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidOreUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
-            document.querySelector(".moreResearchsubmenus > ."+name+"submenu").innerHTML += button
-        }
-    }
     l(name, document.querySelector(`.${name}Ores`))
 }
 
@@ -1360,6 +1397,17 @@ function ie() {
 
 
 function l(name, div) {
+
+    for (var upgrade of q.asteroidOreUpgrades) {
+        for (var ore of q[q.asteroid.belt+"Ores"]) {
+            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidOreUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
+            document.querySelector(".moreResearchsubmenus > ."+name+"submenu > .ores").innerHTML += button
+        }
+        for (var ore of q[q.asteroid.belt+"Gasses"]) {
+            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidGasUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
+            document.querySelector(".moreResearchsubmenus > ."+name+"submenu > .gasses").innerHTML += button
+        }
+    }
 
     for (var n of q[q.asteroid.belt+"Ores"]) {
         var set = document.createElement("div")
@@ -1383,20 +1431,58 @@ function l(name, div) {
         const automationButtonHtml = `
             <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(n)+"Buy"}" onclick="automateAsteroidOre('${name}','${n}')">${"Automate "+ capitalizeFirstLetter(n)}</button>
         `
-        document.querySelector(".automationsubmenus > ."+name+"submenu").innerHTML += automationButtonHtml
+        document.querySelector(".automationsubmenus > ."+name+"submenu > .ores").innerHTML += automationButtonHtml
         
 
         const upgradeButtonHtml = `
             <button class="upgradeButton ${name+"upgrade"+ capitalizeFirstLetter(n)+"Buy"} " onclick="upgradeAsteroidOre('${name}','${n}')">${"Upgrade "+ capitalizeFirstLetter(n)        }</button>
         `
 
-        document.querySelector(".upgradessubmenus > ."+name+"submenu").innerHTML += upgradeButtonHtml
+        document.querySelector(".upgradessubmenus > ."+name+"submenu > .ores").innerHTML += upgradeButtonHtml
 
         const oreResearchButtonHtml = `
         <button class="upgradeButton ${name}research${capitalizeFirstLetter(n)}Buy" onclick="researchAsteroidOre('${name}','${n}')">${"Research "+ capitalizeFirstLetter(n)}</button>
         `
 
-        document.querySelector(".oreResearchsubmenus > ."+name+"submenu").innerHTML += oreResearchButtonHtml
+        document.querySelector(".oreResearchsubmenus > ."+name+"submenu > .ores").innerHTML += oreResearchButtonHtml
+    }
+
+    for (var n of q[q.asteroid.belt+"Gasses"]) {
+        var set = document.createElement("div")
+        set.id = name + "_"+ capitalizeFirstLetter(n) + "_set"
+        set.className = "set"
+        set.innerHTML = `
+        <div class="asteroid_set_container">
+        <button class="give_money ${name}_${n}_give" onclick="click_asteroid('${name}','${n}')">${n}</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <div class="progress ${name}_${n}_progress">
+            <div class="progress_fill ${name}_${n}_fill"></div>
+                <label class="click_display ${name}_${n}_click">$12</label>
+        </div></div><br><br><br><br>
+        `
+        
+
+        document.querySelector(`.${name}Gasses`).appendChild(set)
+
+        const automationButtonHtml = `
+            <button class="upgradeButton ${name+"automate"+ capitalizeFirstLetter(n)+"Buy"}" onclick="automateAsteroidGas('${name}','${n}')">${"Automate "+ capitalizeFirstLetter(n)}</button>
+        `
+        document.querySelector(".automationsubmenus > ."+name+"submenu > .gasses").innerHTML += automationButtonHtml
+        
+
+        const upgradeButtonHtml = `
+            <button class="upgradeButton ${name+"upgrade"+ capitalizeFirstLetter(n)+"Buy"} " onclick="upgradeAsteroidGas('${name}','${n}')">${"Upgrade "+ capitalizeFirstLetter(n)}</button>
+        `
+
+        document.querySelector(".upgradessubmenus > ."+name+"submenu > .gasses").innerHTML += upgradeButtonHtml
+
+        const oreResearchButtonHtml = `
+        <button class="upgradeButton ${name}research${capitalizeFirstLetter(n)}Buy" onclick="researchAsteroidGas('${name}','${n}')">${"Research "+ capitalizeFirstLetter(n)}</button>
+        `
+
+        document.querySelector(".oreResearchsubmenus > ."+name+"submenu > .gasses").innerHTML += oreResearchButtonHtml
     }
 }
 
@@ -1419,8 +1505,31 @@ function asteroidOreUpgrade(upgrade,asteroid_name, ore_name){
     else {
         customAlert(`You need U$${num2txt(Math.floor(theUpgrade.cost - q.asteroid.money))} more to do this!`)
     }
-
 }
+
+function asteroidgasUpgrade(upgrade,asteroid_name, gas_name){
+    var gas = q.asteroid.asteroids[asteroid_name][gas_name]
+    var theUpgrade = gas.upgrades[upgrade]
+
+
+    if (theUpgrade.purchased) {return}
+
+    if (q.asteroid.gasMoney >= theUpgrade.cost) {
+        q.asteroid.gasMoney -= theUpgrade.cost
+        theUpgrade.purchased = true
+
+
+        gas.value /= gas.multiplier
+        gas.multiplier = theUpgrade.multiplier
+        gas.value *= theUpgrade.multiplier
+    }
+    else {
+        customAlert(`You need G$${num2txt(Math.floor(theUpgrade.cost - q.asteroid.gasMoney))} more to do this!`)
+    }
+}
+
+
+
 
 function researchAsteroidAmount(number) {
     cost = 5000*(number-1)
@@ -1447,6 +1556,17 @@ function getPreviousOre(ore) {
     }
 }
 
+function getPreviousGas(gas) {
+    for (var belt of q.asteroidBelts) {
+        if (q[belt+"Gasses"].includes(gas)) {
+            var index = q[belt+"Gasses"].indexOf(gas) - 1
+            
+            console.log(q[belt+"Gasses"][index])
+            return q[belt+"Gasses"][index]
+        }
+    }
+}
+
 function researchAsteroidOre(asteroid_name, ore_name){
     var ore = q.asteroid.asteroids[asteroid_name][ore_name]
     var previousOreName = getPreviousOre(ore_name)
@@ -1463,6 +1583,25 @@ function researchAsteroidOre(asteroid_name, ore_name){
     }
     else {
         customAlert(`You need R$${num2txt(Math.floor(ore.researchRequired - q.asteroid.research))} more to do this!!!`)
+    }
+}
+
+function researchAsteroidGas(asteroid_name, gas_name){
+    var gas = q.asteroid.asteroids[asteroid_name][gas_name]
+    var previousgasName = getPreviousGas(gas_name)
+    var previousGas = q.asteroid.asteroids[asteroid_name][previousgasName]
+
+    if (gas.unlocked == true) {return}
+    if (previousGas.unlocked == false) {customAlert(`You need to unlock ${previousGas} first!`);return}
+    if (previousGas.level < 20) {customAlert(`${capitalizeFirstLetter(previousGas)} needs to be level 20! It is currently level ${previousOre.level}!`); return}
+
+    if (q.asteroid.research >= gas.researchRequired) {
+        q.asteroid.research -= gas.researchRequired
+
+        gas.unlocked = true
+    }
+    else {
+        customAlert(`You need R$${num2txt(Math.floor(gas.researchRequired - q.asteroid.research))} more to do this!!!`)
     }
 }
 
@@ -1485,6 +1624,25 @@ function upgradeAsteroidOre(asteroid_name, ore_name){
     }
 }
 
+function upgradeAsteroidGas(asteroid_name, gas_name){
+    var gas = q.asteroid.asteroids[asteroid_name][gas_name]
+    if (q.asteroid.gasMoney >= gas.cost) {
+        q.asteroid.gasMoney -= gas.cost
+
+        gas.cost = Math.floor(gas.cost * 11)/10
+        gas.level += 1
+        gas.value += gas.originalValue * gas.multiplier
+        gas.progress = 0
+
+        if (gas.level < 50) {
+            gas.time -= gas.time_reduce
+        }
+    }
+    else {
+        customAlert(`You need G$${num2txt(Math.floor(gas.cost - q.asteroid.gasMoney))} more to do this!`)
+    }
+}
+
 function automateAsteroidOre(asteroid_name, ore_name) {
     var ore = q.asteroid.asteroids[asteroid_name][ore_name]
 
@@ -1497,6 +1655,21 @@ function automateAsteroidOre(asteroid_name, ore_name) {
     }
     else {
         customAlert(`You need U$${num2txt(Math.floor((ore.originalCost * 25) - q.asteroid.money))} more to do this!!`)
+    }
+}
+
+function automateAsteroidGas(asteroid_name, gas_name) {
+    var gas = q.asteroid.asteroids[asteroid_name][gas_name]
+
+    if (gas.auto) {return false}
+    
+
+    if (q.asteroid.gasMoney >= gas.originalCost * 25) {
+        gas.auto = true
+        q.asteroid.gasMoney -= gas.originalCost * 25
+    }
+    else {
+        customAlert(`You need G$${num2txt(Math.floor((gas.originalCost * 25) - q.asteroid.gasMoney))} more to do this!!`)
     }
 }
 
