@@ -1,5 +1,3 @@
-
-
 document.addEventListener("keydown", event => {
     if (gameLoaded) {
         if (event.key.toLowerCase() == "r") {
