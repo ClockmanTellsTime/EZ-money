@@ -1793,8 +1793,6 @@ function updatePlanet() {
             else {
                 document.querySelector(".changeWorldUp").style.display = "block"
 
-                //hide down button when on earth
-
                 if (planet == 0) {
                     document.querySelector(".changeWorldDown").style.display = "none"
                 }
