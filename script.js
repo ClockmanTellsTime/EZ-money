@@ -1404,8 +1404,8 @@ function l(name, div) {
             document.querySelector(".moreResearchsubmenus > ."+name+"submenu > .ores").innerHTML += button
         }
         for (var ore of q[q.asteroid.belt+"Gasses"]) {
-            var button = `<button class="upgradeButton t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidGasUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
-            document.querySelector(".moreResearchsubmenus > ."+name+"submenu > .gasses").innerHTML += button
+            var button = `<button class="upgradeButton gasUpgrade t${name}_${ore}_${md5(upgrade)}_buy" onclick="asteroidGasUpgrade('${upgrade}','${name}','${ore}')">${ore} - ${upgrade}X profits</button>`
+            document.querySelector(".moreResearchsubmenus > ."+name+"submenu > .ores").innerHTML += button
         }
     }
 
@@ -1852,6 +1852,11 @@ function updateAsteroid() {
         for (var i of gassMenuUpgrades) {
             i.style.display = "block"
         }
+
+        var gassMenuUpgrades = document.getElementsByClassName(`gasUpgrade`)
+        for (var i of gassMenuUpgrades) {
+            i.style.display = "block"
+        }
     
         var asteroidGasses = document.getElementsByClassName(`asteroidGasses`)
         for (var i of asteroidGasses) {
@@ -1861,6 +1866,11 @@ function updateAsteroid() {
     else {
         
         var gassMenuUpgrades = document.getElementsByClassName(`gasses`)
+        for (var i of gassMenuUpgrades) {
+            i.style.display = "none"
+        }
+
+        var gassMenuUpgrades = document.getElementsByClassName(`gasUpgrade`)
         for (var i of gassMenuUpgrades) {
             i.style.display = "none"
         }
