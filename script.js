@@ -1372,12 +1372,12 @@ function loadAsteroidHtml(name) {
     div.classList.add("asteroid")
     div.innerHTML = `
     <div class='${name}Ores asteroidOres'></div>
-    <div class='${name}Gasses asteroidOres'></div>
+    <div class='${name}Gasses asteroidGasses'></div>
     `
 
     document.querySelector(".asteroids > .asteroids").appendChild(div)
 
-    var automations = `<div class="submenu ${name+"submenu"}"><div class="ores"><br><br></div><div class="gasses"></div></div>`
+    var automations = `<div class="submenu ${name+"submenu"}"><div class="ores"><br><br></div><br><br><br><div class="gasses"></div></div>`
 
     document.querySelector(".automationsubmenus").innerHTML += automations
     document.querySelector(".upgradessubmenus").innerHTML += automations
@@ -1458,7 +1458,7 @@ function l(name, div) {
         &nbsp;
         &nbsp;
         <div class="progress ${name}_${n}_progress">
-            <div class="progress_fill ${name}_${n}_fill"></div>
+            <div class="progress_fill ${name}_${n}_fill gas_progress_fill"></div>
                 <label class="click_display ${name}_${n}_click">$12</label>
         </div></div><br><br><br><br>
         `
@@ -1592,8 +1592,8 @@ function researchAsteroidGas(asteroid_name, gas_name){
     var previousGas = q.asteroid.asteroids[asteroid_name][previousgasName]
 
     if (gas.unlocked == true) {return}
-    if (previousGas.unlocked == false) {customAlert(`You need to unlock ${previousGas} first!`);return}
-    if (previousGas.level < 20) {customAlert(`${capitalizeFirstLetter(previousGas)} needs to be level 20! It is currently level ${previousOre.level}!`); return}
+    if (previousGas.unlocked == false) {customAlert(`You need to unlock ${previousgasName} first!`);return}
+    if (previousGas.level < 20) {customAlert(`${capitalizeFirstLetter(previousgasName)} needs to be level 20! It is currently level ${previousGas.level}!`); return}
 
     if (q.asteroid.research >= gas.researchRequired) {
         q.asteroid.research -= gas.researchRequired
@@ -1846,6 +1846,30 @@ function updateAsteroid() {
         document.querySelector(".buttons2").style.display = "block"
     }
 
+
+    if (q.asteroid.gasExtractor.purchased) {
+        var gassMenuUpgrades = document.getElementsByClassName(`gasses`)
+        for (var i of gassMenuUpgrades) {
+            i.style.display = "block"
+        }
+    
+        var asteroidGasses = document.getElementsByClassName(`asteroidGasses`)
+        for (var i of asteroidGasses) {
+            i.style.display = "block"
+        }
+    }
+    else {
+        
+        var gassMenuUpgrades = document.getElementsByClassName(`gasses`)
+        for (var i of gassMenuUpgrades) {
+            i.style.display = "none"
+        }
+    
+        var asteroidGasses = document.getElementsByClassName(`asteroidGasses`)
+        for (var i of asteroidGasses) {
+            i.style.display = "none"
+        }
+    }
  
     document.querySelector(".changeAsteroidUp").style.display = ""
     document.querySelector(".changeAsteroidDown").style.display = ""
@@ -3481,11 +3505,16 @@ setIntervul(function(){
                 document.querySelector(`.${a}_${capitalizeFirstLetter(ore)}_give`).click()
             }
         }
+        for (var ore of q[q.asteroid.belt+"Gasses"]) {
+            if (q.asteroid.asteroids[a][ore].auto) {
+                document.querySelector(`.${a}_${capitalizeFirstLetter(ore)}_give`).click()
+            }
+        }
     }
 },100)
 
 
-
+var progressAmount = 250
 setIntervul(function(){
     for(var a of q.asteroids) {
         for (var o of q[q.asteroid.belt+"Ores"]) {
@@ -3494,7 +3523,7 @@ setIntervul(function(){
             if (ore.clicked == false) {continue}
 
             var t = Math.floor(ore.time)
-            ore.timePassed += 1000
+            ore.timePassed += progressAmount
 
             width = Math.floor((ore.timePassed/ore.time)*100)
             ore.progress = width
@@ -3514,8 +3543,34 @@ setIntervul(function(){
                 progressbar.style.width = "0%"
             } 
         }
+        for (var o of q[q.asteroid.belt+"Gasses"]) {
+            var ore = q.asteroid.asteroids[a][o]
+
+            if (ore.clicked == false) {continue}
+
+            var t = Math.floor(ore.time)
+            ore.timePassed += progressAmount
+
+            width = Math.floor((ore.timePassed/ore.time)*100)
+            ore.progress = width
+
+            var progressbar = document.querySelector("."+a+"_"+o+"_fill")
+
+            //just for preformance
+            if (a == q.asteroids[asteroid-1]) {
+                progressbar.style.width = width+"%"
+            }
+
+            if (ore.timePassed >= t + 100) {
+                ore.timePassed = 0
+                ore.clicked = false
+                q.asteroid.gasMoney += ore.value
+                q.asteroid.research += 50
+                progressbar.style.width = "0%"
+            } 
+        }
     }
-},1000)
+},progressAmount)
 
 
 

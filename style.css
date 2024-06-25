@@ -373,6 +373,7 @@ body{
 }
 .gasses {
     position: relative;
+    top: 100px;
     width: 100%;
     height: 100%;
 }
@@ -387,6 +388,17 @@ body{
     left: 10px;
     top: 10px;
 
+}
+
+.asteroidGasses {
+    position: relative;
+    left: 10px;
+    top: 10px;
+
+}
+
+.gas_progress_fill {
+    background-color: red;
 }
 
 .button2 {
